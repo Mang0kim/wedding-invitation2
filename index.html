@@ -30,14 +30,13 @@
   />
 
   <style>
-* {
+    * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      background:
-        radial-gradient(circle at top, #ffffff 0%, #fbfbfd 42%, #f5f5f7 100%);
+      background: radial-gradient(circle at top, #ffffff 0%, #fbfbfd 42%, #f5f5f7 100%);
       color: var(--text);
       font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       font-size: var(--font-body);
@@ -46,18 +45,20 @@
       word-break: keep-all;
       letter-spacing: -0.03em;
       -webkit-font-smoothing: antialiased;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
-    img,
-    video {
+    img, video {
       max-width: 100%;
       display: block;
     }
 
-    button,
-    input,
-    textarea {
+    button, input, textarea, select {
       font-family: inherit;
+      -webkit-text-size-adjust: 100% !important;
+      text-size-adjust: 100% !important;
     }
 
     strong {
@@ -70,11 +71,27 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      scroll-snap-align: none !important;
+      scroll-snap-stop: normal !important;
+      scroll-margin-top: 0 !important;
     }
 
     .closing {
       min-height: 82svh;
       padding: 88px 22px 76px;
+      scroll-snap-align: none !important;
+      scroll-snap-stop: normal !important;
+      scroll-margin-top: 0 !important;
+    }
+
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(48px) scale(0.99);
+      filter: blur(5px);
+      transition: opacity 1.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1.9s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 1.9s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform, filter;
     }
 
     .scroll-reveal.reveal-visible {
@@ -101,7 +118,7 @@
     .title {
       text-align: center;
       color: var(--text-strong);
-      font-size: var(--font-title);
+      font-size: var(--font-21) !important;
       font-weight: 300;
       line-height: 1.45;
       margin: 0 0 28px;
@@ -110,11 +127,29 @@
 
     .desc {
       text-align: center;
-      font-size: var(--font-body);
+      font-size: var(--font-16) !important;
       line-height: 2;
       color: var(--text);
       margin: 0 auto;
       font-weight: 200;
+    }
+
+    .kicker {
+      text-align: center;
+      color: var(--accent);
+      font-size: var(--font-kicker);
+      font-weight: 300;
+      margin-bottom: 9px !important;
+      letter-spacing: -0.01em;
+    }
+
+    .food-section .title,
+    .gallery-section .title,
+    .closing .title,
+    section.scroll-reveal .title,
+    section.scroll-reveal .date-line,
+    section.scroll-reveal .location-address {
+      margin-top: 0 !important;
     }
 
     .btn-rect {
@@ -122,48 +157,124 @@
       background: var(--accent);
       color: var(--white);
       border-radius: 999px;
-      padding: 7px 8px 7px 16px;
+      padding: 7px 8px 7px 16px !important;
       min-height: 34px;
-      font-size: var(--font-small);
+      font-size: var(--font-14) !important;
       font-weight: 300;
       cursor: pointer;
-      box-shadow: var(--shadow-red);
-      display: inline-flex;
-      align-items: center;
+      box-shadow: none !important;
+      display: inline-flex !important;
+      align-items: center !important;
       justify-content: space-between;
-      gap: 9px;
-      transition:
-        transform 0.14s ease,
-        box-shadow 0.14s ease,
-        background 0.14s ease;
-      white-space: nowrap;
+      gap: 9px !important;
+      transition: transform 0.14s ease, background 0.14s ease;
+      white-space: nowrap !important;
       line-height: 1;
+      width: fit-content !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      flex: 0 0 auto !important;
     }
 
     .btn-rect:hover {
       background: var(--accent-dark);
+      box-shadow: none !important;
     }
 
     .btn-rect:active {
       transform: scale(0.97);
-      box-shadow: 0 3px 8px rgba(236, 34, 31, 0.14);
+      box-shadow: none !important;
     }
 
     .btn-rect.small {
-      width: 148px;
-      padding: 6px 7px 6px 14px;
+      padding: 7px 8px 7px 16px !important;
       min-height: 32px;
-      font-size: 13px;
+      font-size: var(--font-14) !important;
     }
 
     .btn-rect.no-plus {
-      width: auto;
-      justify-content: center;
-      padding: 9px 16px;
+      width: fit-content !important;
+      min-width: 0 !important;
+      justify-content: center !important;
+      padding: 9px 16px !important;
       min-height: 36px;
     }
 
+    .btn-rect::after {
+      content: "" !important;
+      width: 21px !important;
+      height: 21px !important;
+      border-radius: 50% !important;
+      background: linear-gradient(var(--accent), var(--accent)) center / 9px 1.35px no-repeat,
+            linear-gradient(var(--accent), var(--accent)) center / 1.35px 9px no-repeat,
+            var(--white) !important;
+      color: var(--accent);
+      display: inline-block !important;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit !important;
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1 !important;
+      flex: 0 0 21px !important;
+      text-align: center;
+      transform: none !important;
+      min-width: 21px !important;
+      min-height: 21px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      box-sizing: border-box !important;
+      box-shadow: none !important;
+    }
+
+    .btn-rect.small::after {
+      width: 20px !important;
+      height: 20px !important;
+      line-height: 20px;
+      flex-basis: 20px !important;
+      font-size: 16px;
+      min-width: 20px !important;
+      min-height: 20px !important;
+      background: linear-gradient(var(--accent), var(--accent)) center / 8.5px 1.3px no-repeat,
+            linear-gradient(var(--accent), var(--accent)) center / 1.3px 8.5px no-repeat,
+            var(--white) !important;
+    }
+
+    .btn-rect.no-plus::after {
+      display: none !important;
+      content: none !important;
+    }
+
     /* 1. 인트로 */
+    .intro-section {
+      min-height: 100svh;
+      padding-top: 9vh;
+      padding-bottom: 0;
+      justify-content: flex-start;
+      scroll-snap-align: none !important;
+      scroll-snap-stop: normal !important;
+      scroll-margin-top: 0 !important;
+    }
+
+    .opening-icon {
+      text-align: center;
+      font-size: var(--font-16) !important;
+      line-height: 1;
+      margin: 0 0 14px;
+    }
+
+    .intro-section .title {
+      margin-bottom: 63px;
+    }
+
+    .intro-message {
+      max-width: 330px;
+      margin: 0 auto 63px;
+      font-size: var(--font-16) !important;
+      line-height: 1.55;
+      color: var(--text);
+    }
 
     .couple-grid {
       display: grid;
@@ -173,12 +284,17 @@
     }
 
     .couple-card {
-      text-align: center;
+      text-align: center !important;
+    }
+
+    .couple-card .btn-rect {
+      margin-top: 16px;
+      align-items: center !important;
     }
 
     .couple-family {
       margin-top: 0;
-      font-size: var(--font-small);
+      font-size: var(--font-14) !important;
       line-height: 1.7;
       color: var(--text-soft);
       font-weight: 200;
@@ -190,14 +306,10 @@
 
     .couple-name {
       margin-top: 8px;
-      font-size: var(--font-name);
+      font-size: var(--font-21) !important;
       font-weight: 300;
       color: var(--text-strong);
       letter-spacing: -0.045em;
-    }
-
-    .couple-card .btn-rect {
-      margin-top: 16px;
     }
 
     .fallback-box {
@@ -221,7 +333,7 @@
     .date-line {
       text-align: center;
       color: var(--text-strong);
-      font-size: var(--font-subtitle);
+      font-size: var(--font-21) !important;
       font-weight: 300;
       margin-bottom: 42px;
       line-height: 1.45;
@@ -264,6 +376,7 @@
       justify-content: center;
       color: var(--text-soft);
       font-weight: 200;
+      font-size: var(--font-14) !important;
     }
 
     .calendar-grid .day-name {
@@ -276,22 +389,34 @@
       color: transparent;
     }
 
-    .reveal-visible .wedding-day {
-      animation: softPop 1.2s ease 0.45s both;
+    .calendar-grid .wedding-day,
+    .reveal-visible .calendar-grid .wedding-day {
+      width: 28px;
+      height: 28px;
+      margin: auto;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 50%;
+      font-weight: 300;
+      box-shadow: none;
+      transform-origin: center center !important;
+      animation: weddingDayPulse2px 1.65s ease-in-out 0.45s infinite !important;
     }
 
-    @keyframes softPop {
-      0% {
-        transform: scale(0.86);
-        opacity: 0;
-      }
-      55% {
-        transform: scale(1.06);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1);
-      }
+    @keyframes weddingDayPulse2px {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.142857); }
+    }
+
+    .calendar-grid .sunday-name,
+    .calendar-grid .calendar-sunday,
+    .calendar-grid .calendar-holiday {
+      color: rgba(236, 34, 31, 0.56);
+    }
+
+    .calendar-grid .saturday-name,
+    .calendar-grid .calendar-saturday {
+      color: rgba(0, 113, 227, 0.50);
     }
 
     .date-divider {
@@ -304,18 +429,30 @@
     .wedding-count-text,
     .gallery-subtitle {
       text-align: center;
-      font-size: var(--font-body);
+      font-size: var(--font-16) !important;
       color: var(--text);
       line-height: 1.7;
       font-weight: 200;
       letter-spacing: -0.03em;
     }
 
+    .wedding-count-text strong,
+    .gallery-subtitle strong {
+      color: var(--accent);
+      font-size: 1em;
+      font-weight: 300;
+    }
+
+    .wedding-count-text.wedding-today {
+      color: var(--accent);
+      font-weight: 300;
+    }
+
     /* 3. 모시는 곳 */
     .location-address {
       text-align: center;
       color: var(--text-strong);
-      font-size: var(--font-subtitle);
+      font-size: var(--font-21) !important;
       line-height: 1.45;
       margin-bottom: 10px;
       font-weight: 300;
@@ -325,7 +462,7 @@
     .location-detail {
       text-align: center;
       color: var(--text);
-      font-size: var(--font-body);
+      font-size: var(--font-16) !important;
       line-height: 1.7;
       margin: 0 auto 34px;
       font-weight: 200;
@@ -354,7 +491,94 @@
       overflow: hidden;
     }
 
+    .map-links {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 10px;
+      padding: 16px 0 0;
+      background: transparent;
+    }
+
+    .map-link {
+      border: 1px solid rgba(44, 44, 44, 0.06);
+      height: 40px !important;
+      color: var(--text-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center !important;
+      text-decoration: none;
+      font-size: var(--font-14) !important;
+      font-weight: 300;
+      background: rgba(255, 255, 255, 0.86);
+      border-radius: 999px;
+      box-shadow: 0 8px 18px rgba(44, 44, 44, 0.045);
+      backdrop-filter: blur(12px);
+      letter-spacing: -0.03em;
+      position: relative;
+      overflow: hidden;
+      line-height: 1;
+      width: 100% !important;
+      min-width: 0 !important;
+    }
+
+    .map-link::after {
+      content: "↗";
+      margin-left: 7px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1;
+      transform: translateY(1px);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transform-origin: center;
+    }
+
     /* 4. 예식안내 */
+    .guide-wrap {
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto;
+      background: var(--surface-soft);
+      border-radius: var(--radius-card);
+      padding: 8px 8px 18px !important;
+      box-shadow: inset 0 0 0 1px rgba(44, 44, 44, 0.03);
+      height: 272px !important;
+      min-height: 272px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      box-sizing: border-box !important;
+      touch-action: pan-y !important;
+    }
+
+    .guide-tabs {
+      background: rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      padding: 5px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0;
+      margin-bottom: 22px !important;
+      align-items: center;
+      box-shadow: none;
+    }
+
+    .guide-tab {
+      border: 0;
+      background: transparent;
+      color: var(--text-soft);
+      font-size: var(--font-14) !important;
+      font-weight: 300 !important;
+      height: 44px !important;
+      width: 100%;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: none;
+      transition: background 0.22s ease, color 0.22s ease, transform 0.16s ease, box-shadow 0.22s ease;
+      white-space: nowrap;
+    }
 
     .guide-tab:active {
       transform: scale(0.98);
@@ -365,6 +589,46 @@
       color: var(--accent);
       font-weight: 300;
       box-shadow: 0 8px 24px rgba(44, 44, 44, 0.06);
+    }
+
+    .guide-content {
+      min-height: 174px !important;
+      display: none !important;
+      text-align: center !important;
+      font-size: var(--font-16) !important;
+      line-height: 1.72 !important;
+      color: var(--text);
+      padding: 22px 14px 0 !important;
+      font-weight: 200;
+      height: 174px !important;
+      max-height: 174px !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    .guide-content.active {
+      display: block !important;
+    }
+
+    .guide-main-copy {
+      margin: 0 !important;
+    }
+
+    .guide-red-line {
+      color: var(--accent) !important;
+      font-weight: 300;
+    }
+
+    .guide-black-line {
+      color: var(--text) !important;
+      font-weight: 200 !important;
+    }
+
+    .guide-ending-emoji {
+      display: inline-block !important;
+      font-size: var(--font-16) !important;
+      line-height: 1 !important;
+      margin-top: 0 !important;
     }
 
     /* 5. 맛집 */
@@ -379,7 +643,14 @@
     }
 
     .food-center-btn {
-      text-align: center;
+      text-align: center !important;
+    }
+
+    .food-center-btn .btn-rect {
+      align-items: center !important;
+      padding: 7px 8px 7px 16px;
+      justify-content: center;
+      gap: 10px;
     }
 
     /* 6. 사진첩 */
@@ -387,33 +658,194 @@
       min-height: auto;
       padding: 96px 24px 96px;
       justify-content: flex-start;
+      scroll-snap-align: none !important;
+      scroll-snap-stop: normal !important;
+      scroll-margin-top: 0 !important;
     }
 
-    .gallery-thumb.empty::after {
-      content: attr(data-fallback);
-      position: absolute;
-      inset: 0;
+    .gallery-subtitle {
+      margin: -12px auto 34px;
       display: flex;
+      align-items: center !important;
+      justify-content: center;
+      gap: 7px;
+      text-align: center;
+      line-height: 22px;
+      width: 100%;
+    }
+
+    .gallery-subtitle-text {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: var(--text-soft);
-      font-size: var(--font-body);
-      background: var(--surface-soft);
+      line-height: 24px !important;
+      height: 24px !important;
     }
 
-    .gallery-more .btn-rect.small {
-      width: auto;
-      min-height: 30px;
-      padding: 6px 7px 6px 14px;
-      font-size: 13px;
+    .timeline-open-btn {
+      width: 20px !important;
+      height: 20px !important;
+      border: 0;
+      border-radius: 50% !important;
+      background: var(--accent);
+      color: transparent;
+      font-family: inherit !important;
+      font-size: 0 !important;
+      font-weight: 300;
+      line-height: 0 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 0 !important;
+      cursor: pointer;
+      box-shadow: none !important;
+      min-width: 20px !important;
+      aspect-ratio: 1 / 1;
+      position: relative !important;
+      min-height: 20px !important;
+      margin: 0 !important;
+      vertical-align: middle;
+      overflow: hidden !important;
+      align-self: center !important;
+      flex: 0 0 20px !important;
     }
 
-    .gallery-more .btn-rect.small::after {
-      width: 19px;
-      height: 19px;
-      line-height: 19px;
-      flex-basis: 19px;
-      font-size: 15px;
+    .timeline-open-btn::before {
+      content: "+";
+      display: block;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1;
+      transform: translateY(-0.5px);
+      width: 8.5px !important;
+      height: 1.25px !important;
+    }
+
+    .timeline-open-btn::after {
+      content: "" !important;
+      position: absolute !important;
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      background: var(--white) !important;
+      border-radius: 999px !important;
+      display: block !important;
+      width: 1.25px !important;
+      height: 8.5px !important;
+      box-shadow: none !important;
+    }
+
+    .timeline-open-btn:active {
+      transform: scale(0.94) !important;
+    }
+
+    .gallery-shell {
+      width: min(350px, calc(100vw - 48px)) !important;
+      max-width: 350px !important;
+      margin: 0 auto !important;
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
+      overflow: visible !important;
+    }
+
+    .gallery-grid#galleryGrid {
+      display: grid !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      grid-auto-flow: row !important;
+      grid-auto-rows: auto !important;
+      gap: 7px !important;
+      width: 100% !important;
+      align-items: stretch !important;
+      justify-items: stretch !important;
+    }
+
+    .gallery-grid#galleryGrid > .gallery-item,
+    .gallery-grid#galleryGrid > .gallery-item.gallery-square-item,
+    .gallery-grid#galleryGrid > .gallery-more-cell {
+      position: relative !important;
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      aspect-ratio: 1 / 1 !important;
+      grid-column: auto / span 1 !important;
+      grid-row: auto / span 1 !important;
+      overflow: hidden !important;
+      background: transparent !important;
+    }
+
+    .gallery-grid#galleryGrid > .gallery-item.hidden {
+      display: none !important;
+    }
+
+    .gallery-grid#galleryGrid .gallery-thumb {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      aspect-ratio: 1 / 1 !important;
+      border-radius: 0 !important;
+      overflow: hidden !important;
+      background: var(--surface-soft) !important;
+      box-shadow: none !important;
+      cursor: pointer;
+    }
+
+    .gallery-grid#galleryGrid .gallery-thumb img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      display: block !important;
+      transform: none !important;
+    }
+
+    .gallery-grid#galleryGrid > .gallery-more-cell {
+      background: rgba(245, 245, 247, 0.92) !important;
+      cursor: pointer !important;
+    }
+
+    .gallery-grid#galleryGrid > .gallery-more-cell .gallery-more {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      color: var(--accent);
+      font-size: var(--font-small);
+      font-weight: 300;
+      gap: 5px !important;
+      line-height: 1 !important;
+    }
+
+    .gallery-more span {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      height: 20px !important;
+      line-height: 20px !important;
+    }
+
+    .gallery-more::after {
+      content: "" !important;
+      margin-left: 0 !important;
+      font-size: 16px;
+      line-height: 20px !important;
+      display: inline-block !important;
+      align-items: center !important;
+      justify-content: center !important;
+      height: 10px !important;
+      transform: none !important;
+      width: 10px !important;
+      flex: 0 0 10px !important;
+      margin: 0 !important;
+      background: linear-gradient(var(--accent), var(--accent)) center / 10px 1.35px no-repeat,
+            linear-gradient(var(--accent), var(--accent)) center / 1.35px 10px no-repeat !important;
+      align-self: center !important;
+      box-sizing: border-box !important;
     }
 
     .video-shell {
@@ -425,16 +857,105 @@
       overflow: hidden;
     }
 
+    .video-box {
+      aspect-ratio: 16 / 10;
+      background: var(--surface-soft);
+      border-radius: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-soft);
+      font-size: var(--font-body);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      position: relative !important;
+    }
+
     .video-box video {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
+    .video-play-overlay {
+      position: absolute !important;
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      width: auto !important;
+      height: 36px !important;
+      padding: 7px 8px 7px 16px !important;
+      margin: 0 !important;
+      border: 0 !important;
+      border-radius: 999px !important;
+      background: var(--accent) !important;
+      background-color: var(--accent) !important;
+      box-shadow: none !important;
+      outline: none !important;
+      cursor: pointer !important;
+      z-index: 2 !important;
+      -webkit-tap-highlight-color: transparent !important;
+      min-height: 36px !important;
+      color: var(--white) !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 10px !important;
+      font-size: var(--font-small) !important;
+      font-weight: 300 !important;
+      line-height: 1 !important;
+    }
+
+    .video-play-overlay:active {
+      transform: translate(-50%, -50%) scale(0.97) !important;
+      background: var(--accent-dark) !important;
+    }
+
+    .video-play-overlay.hidden {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    .video-play-overlay span {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      height: 20px !important;
+      line-height: 20px !important;
+      white-space: nowrap !important;
+    }
+
+    .video-play-overlay::after {
+      content: "›" !important;
+      width: 21px !important;
+      height: 21px !important;
+      flex: 0 0 21px !important;
+      border-radius: 50% !important;
+      background: var(--white) !important;
+      color: var(--accent) !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 19px !important;
+      font-weight: 300 !important;
+      line-height: 1 !important;
+      transform: translateY(-0.5px) !important;
+      transform-origin: center !important;
+      min-width: 21px !important;
+      min-height: 21px !important;
+      aspect-ratio: 1 / 1 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      box-sizing: border-box !important;
+      font-family: inherit !important;
+    }
+
     /* 8. 마음 전하실 곳 */
     .account-subtitle {
       text-align: center;
-      font-size: var(--font-body);
+      font-size: var(--font-16) !important;
       color: var(--text);
       margin: -6px 0 30px;
       line-height: 1.7;
@@ -469,16 +990,12 @@
       width: 100%;
       background: transparent;
       border-radius: 999px;
-      font-size: var(--font-small);
+      font-size: var(--font-14) !important;
       font-weight: 300;
       color: var(--text-soft);
       cursor: pointer;
       box-shadow: none;
-      transition:
-        background 0.22s ease,
-        color 0.22s ease,
-        transform 0.16s ease,
-        box-shadow 0.22s ease;
+      transition: background 0.22s ease, color 0.22s ease, transform 0.16s ease, box-shadow 0.22s ease;
     }
 
     .account-tab:active {
@@ -529,13 +1046,13 @@
       min-width: 44px;
       margin-right: 10px;
       color: var(--text-soft);
-      font-size: var(--font-small);
+      font-size: var(--font-14) !important;
       font-weight: 200;
     }
 
     .account-name {
       color: var(--text-strong);
-      font-size: var(--font-body);
+      font-size: var(--font-14) !important;
       font-weight: 300;
     }
 
@@ -552,7 +1069,7 @@
       align-items: center;
     }
 
-    .icon-btn {
+    .person-actions .icon-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -563,7 +1080,7 @@
       padding: 0;
       text-decoration: none;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 18px !important;
       line-height: 1;
     }
 
@@ -581,13 +1098,13 @@
     }
 
     .bank-name {
-      font-size: var(--font-small);
+      font-size: var(--font-14) !important;
       color: var(--text-soft);
       font-weight: 200;
     }
 
     .account-number {
-      font-size: var(--font-small);
+      font-size: var(--font-14) !important;
       color: var(--text-soft);
       overflow-wrap: anywhere;
       font-weight: 200;
@@ -615,1143 +1132,36 @@
     /* 9. 클로징 */
     .closing-heart {
       text-align: center;
-      font-size: var(--font-body);
+      font-size: var(--font-16) !important;
       margin-bottom: 10px;
     }
 
     .closing-text {
       text-align: center;
-      font-size: var(--font-body);
+      font-size: var(--font-16) !important;
       line-height: 1.9;
       color: var(--text-strong);
       font-weight: 200;
     }
 
-    /* modal */
-
-    .modal.show {
-      display: block;
-    }
-
-    .modal-backdrop {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.36);
-      backdrop-filter: blur(12px);
-    }
-
-    .modal-sheet {
-      position: relative;
-      width: calc(100% - 44px);
-      max-width: 390px;
-      max-height: calc(100dvh - 48px);
-      margin: 24px auto;
-      background: rgba(255, 255, 255, 0.92);
-      border: 1px solid rgba(255, 255, 255, 0.64);
-      border-radius: var(--radius-card);
-      overflow: auto;
-      padding: 38px 30px 30px;
-      box-shadow: 0 28px 70px rgba(44, 44, 44, 0.18);
-      backdrop-filter: blur(24px);
-    }
-
-    .modal-bottom-btn {
-      margin-top: 34px;
-      text-align: center;
-    }
-
-    /* 맛집 팝업 */
-    .food-modal-content {
-      padding-top: 36px;
-    }
-
-    .food-modal-title {
-      text-align: center;
-      font-size: var(--font-title);
-      color: var(--text-strong);
-      margin-bottom: 16px;
-      font-weight: 300;
-    }
-
-    .food-modal-desc {
-      text-align: center;
-      font-size: var(--font-body);
-      line-height: 1.8;
-      color: var(--text);
-      margin-bottom: 26px;
-      font-weight: 200;
-    }
-
-    .food-basic-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .food-basic-item {
-      background: var(--surface-soft);
-      border-radius: 18px;
-      padding: 16px;
-      font-size: var(--font-body);
-      line-height: 1.8;
-      color: var(--text);
-      font-weight: 200;
-    }
-
-    /* 사진 전체보기 */
-
-    .viewer-caption {
-      display: none;
-    }
-.intro-section {
-  min-height: 100svh;
-  padding-top: 9vh;
-  padding-bottom: 0;
-  justify-content: flex-start;
-}
-
-    .opening-icon {
-  text-align: center;
-  font-size: 24px;
-  line-height: 1;
-  margin: 0 0 18px;
-  margin-bottom: 14px;
-}
-
-    .intro-section .title {
-      margin-bottom: 63px;
-    }
-
-    .intro-message {
-  max-width: 330px;
-  margin: 0 auto 63px;
-  font-size: var(--font-body);
-  line-height: 1.55;
-  color: var(--text);
-  margin-bottom: 63px;
-}
-
-    .wedding-count-text strong,
-    .gallery-subtitle strong {
-  color: var(--accent);
-  font-size: 1em;
-  font-weight: 300;
-}
-
-    /* === gallery 13 photos + Apple-like continuous scroll === */
-
-    section,
-    .intro-section,
-    .closing,
-    .gallery-section {
-      scroll-snap-align: none !important;
-      scroll-snap-stop: normal !important;
-      scroll-margin-top: 0 !important;
-    }
-
-    .scroll-reveal {
-  opacity: 0;
-  transform: translateY(48px) scale(0.99);
-  filter: blur(5px);
-  transition: opacity 1.9s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 1.9s cubic-bezier(0.22, 1, 0.36, 1),
-        filter 1.9s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform, filter;
-}
-
-    .gallery-item.featured-tall .gallery-thumb {
-      aspect-ratio: 3 / 4;
-    }
-
-    .gallery-item.featured-square .gallery-thumb {
-      aspect-ratio: 1 / 1;
-    }
-
-    /* === D-day count animation & timeline modal === */
-    .wedding-count-text.wedding-today {
-      color: var(--accent);
-      font-weight: 300;
-    }
-
-    .gallery-item.featured-wide .gallery-thumb {
-  aspect-ratio: 16 / 9.5;
-}
-
-    .viewer-sheet {
-  position: relative;
-  width: auto;
-  max-width: calc(100vw - 32px);
-  height: auto;
-  margin: 0;
-  background: transparent;
-  border-radius: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  box-shadow: none;
-  max-height: calc(100dvh - 32px);
-  align-items: center;
-  justify-content: center;
-}
-
-    .viewer-close {
-      color: rgba(255, 255, 255, 0.92);
-      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.38);
-    }
-
-    .viewer-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 64px;
-  border: 0;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 44px;
-  font-weight: 200;
-  line-height: 1;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  box-shadow: none;
-  backdrop-filter: none;
-  padding: 0;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.38);
-}
-
-    .viewer-prev {
-  left: -2px;
-}
-
-    .viewer-next {
-  right: -2px;
-}
-
-    .calendar-grid .sunday-name,
-    .calendar-grid .calendar-sunday {
-      color: rgba(236, 34, 31, 0.56);
-    }
-
-    .calendar-grid .saturday-name,
-    .calendar-grid .calendar-saturday {
-      color: rgba(0, 113, 227, 0.50);
-    }
-
-    .map-link::after {
-  content: "↗";
-  margin-left: 7px;
-  color: var(--accent);
-  font-size: 13px;
-  font-weight: 300;
-  line-height: 1;
-  transform: translateY(1px);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transform-origin: center;
-}
-
-    .guide-red-line {
-      color: var(--accent);
-      font-weight: 300;
-    }
-
-    .gallery-thumb:active img {
-      transform: scale(1.08);
-    }
-
-    .gallery-item.mag-wide .gallery-thumb {
-      aspect-ratio: 16 / 9.5;
-    }
-
-    .gallery-item.mag-square .gallery-thumb {
-      aspect-ratio: 1 / 1;
-    }
-
-    .gallery-item.mag-tall .gallery-thumb {
-      aspect-ratio: 3 / 4;
-    }
-
-    .viewer-image-wrap {
-  flex: 0 1 auto;
-  background: transparent;
-  border-radius: 24px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  margin-top: 8px;
-  touch-action: pan-y;
-  width: auto;
-  height: auto;
-  max-width: calc(100vw - 32px);
-  max-height: calc(100dvh - 32px);
-  margin: 0;
-}
-
-    .viewer-image-wrap img {
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  background: transparent;
-  user-select: none;
-  -webkit-user-drag: none;
-  pointer-events: none;
-  max-width: calc(100vw - 22px);
-  max-height: calc(100dvh - 76px);
-  border-radius: 24px;
-  overflow: hidden;
-  transform: scale(1.015);
-}
-
-    .viewer-counter {
-  position: absolute;
-  top: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 4;
-  padding: 5px 10px;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.28);
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 12px;
-  font-weight: 300;
-  line-height: 1;
-  backdrop-filter: blur(10px);
-}
-
-    .calendar-grid .calendar-holiday {
-      color: rgba(236, 34, 31, 0.56);
-    }
-
-    .food-center-btn .btn-rect {
-  width: auto;
-  min-width: 0;
-  padding: 7px 8px 7px 16px;
-  justify-content: center;
-  gap: 10px;
-}
-
-    .gallery-subtitle-text strong {
-      display: inline-flex;
-      align-items: center;
-      height: 22px;
-      line-height: 22px;
-    }
-
-    .gallery-item {
-  position: relative;
-  min-width: 0;
-  min-height: 0;
-}
-
-    .gallery-item.featured-wide {
-  grid-column: 1 / 5;
-  grid-row: span 5;
-}
-
-    .gallery-item.featured-tall {
-      grid-column: 5 / 7;
-      grid-row: span 3;
-    }
-
-    .gallery-item.featured-square {
-      grid-column: 5 / 7;
-      grid-row: span 2;
-    }
-
-    .guide-menu-row + .guide-menu-row {
-      margin-top: 4px;
-    }
-
-    .gallery-item.mag-wide {
-  grid-column: span 6;
-  grid-row: span 4;
-}
-
-    .gallery-item.mag-square {
-  grid-column: span 3;
-  grid-row: span 4;
-}
-
-    .gallery-item.mag-tall {
-  grid-column: span 3;
-  grid-row: span 4;
-}
-
-    .copy-toast {
-  position: fixed;
-  left: 50%;
-  bottom: auto;
-  transform: translate(-50%, calc(-50% + 14px));
-  opacity: 0;
-  z-index: 1200;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: rgba(44, 44, 44, 0.88);
-  color: var(--white);
-  font-size: var(--font-small);
-  font-weight: 300;
-  line-height: 1;
-  pointer-events: none;
-  transition: opacity 0.22s ease, transform 0.22s ease;
-  backdrop-filter: blur(12px);
-  top: 50%;
-}
-
-    .copy-toast.show {
-  opacity: 1;
-  transform: translate(-50%, -50%);
-}
-
-    .timeline-list {
-  display: grid;
-  gap: 12px;
-  margin-top: 0;
-}
-
-    .timeline-item {
-  background: var(--surface-soft);
-  border-radius: 20px;
-  padding: 15px 17px;
-  text-align: left;
-}
-
-    .timeline-date {
-  color: var(--accent);
-  font-size: var(--font-small);
-  font-weight: 300;
-  margin-bottom: 4px;
-  letter-spacing: -0.01em;
-}
-
-    .timeline-title {
-  color: var(--text-strong);
-  font-size: var(--font-body);
-  font-weight: 300;
-  margin-bottom: 4px;
-}
-
-    .timeline-desc {
-  color: var(--text);
-  font-size: var(--font-small);
-  font-weight: 200;
-  line-height: 1.58;
-}
-.timeline-modal-content {
-  padding-top: 36px;
-}
-
-    .timeline-modal-title {
-  text-align: center;
-  font-size: var(--font-body);
-  line-height: 1.8;
-  color: var(--text);
-  margin-bottom: 26px;
-  font-weight: 300;
-}
-
-    .timeline-line-list {
-      position: relative;
-      display: grid;
-      gap: 0;
-      margin: 0 auto;
-      max-width: 326px;
-    }
-
-    .timeline-line-list .timeline-item {
-      position: relative;
-      display: grid;
-      grid-template-columns: 34px minmax(0, 1fr);
-      gap: 14px;
-      padding: 0 0 28px;
-      background: transparent;
-      border-radius: 0;
-      text-align: left;
-      box-shadow: none;
-    }
-
-    .timeline-line-list .timeline-item::after {
-      content: "";
-      position: absolute;
-      left: 16px;
-      top: 38px;
-      bottom: 8px;
-      width: 1px;
-      background: rgba(236, 34, 31, 0.20);
-    }
-
-    .timeline-line-list .timeline-item:last-child {
-      padding-bottom: 0;
-    }
-
-    .timeline-line-list .timeline-item:last-child::after {
-      display: none;
-    }
-
-    .timeline-marker {
-      position: relative;
-      z-index: 1;
-      width: 34px;
-      height: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: var(--surface-soft);
-      box-shadow: inset 0 0 0 1px rgba(44, 44, 44, 0.04);
-      font-size: 18px;
-      line-height: 1;
-    }
-
-    .timeline-text {
-      min-width: 0;
-      padding-top: 1px;
-    }
-
-    .timeline-line-list .timeline-date {
-      margin-bottom: 5px;
-      color: var(--accent);
-      font-size: var(--font-small);
-      font-weight: 300;
-      line-height: 1.35;
-      letter-spacing: -0.01em;
-    }
-
-    .timeline-line-list .timeline-title {
-      margin-bottom: 5px;
-      color: var(--text-strong);
-      font-size: var(--font-body);
-      font-weight: 300;
-      line-height: 1.45;
-    }
-
-    .timeline-line-list .timeline-desc {
-      color: var(--text);
-      font-size: var(--font-small);
-      font-weight: 200;
-      line-height: 1.62;
-      word-break: keep-all;
-    }
-#timelineModal .timeline-line-list .timeline-date {
-      color: var(--accent);
-      flex: 0 0 auto;
-    }
-
-    #timelineModal .timeline-line-list .timeline-title {
-      color: var(--text-strong);
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-#timelineModal.modal.show {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px 0;
-}
-
-    #timelineModal .timeline-line-list .timeline-date,
-    #timelineModal .timeline-line-list .timeline-title {
-  margin: 0;
-  font-size: var(--font-small);
-  font-weight: 300;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-}
-
-    #timelineModal .modal-bottom-btn .btn-rect {
-      margin: 0 auto;
-    }
-/* === 2026-07-05 popup visual centering + unified mobile width === */
-
-    #foodModal .modal-sheet{
-  overflow: auto;
-}
-
-    #timelineModal .modal-sheet {
-  width: calc(100% - 44px);
-  max-width: 390px;
-  max-height: calc(100dvh - 48px);
-  margin: 0 auto;
-  overflow: hidden;
-  padding: 32px 28px 24px;
-  height: calc(100dvh - 48px);
-  display: flex;
-  flex-direction: column;
-}
-
-    #viewerModal.modal.show {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--popup-edge);
-  height: var(--modal-vh);
-}
-
-    #viewerModal .viewer-sheet,
-    #viewerModal .viewer-image-wrap,
-    #viewerModal .viewer-image-wrap img {
-      max-width: var(--popup-width);
-      max-height: calc(var(--modal-vh) - (var(--popup-edge) * 2));
-    }
-.modal {
-  position: fixed;
-  inset: auto 0 auto 0;
-  display: none;
-  z-index: 999;
-  top: var(--modal-vtop);
-  height: var(--modal-vh);
-}
-
-    #foodModal.modal.show, #timelineModal.modal.show, #viewerModal.modal.show{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-    }
-
-    #viewerModal .modal-backdrop {
-  background: rgba(0, 0, 0, 0.74);
-  backdrop-filter: blur(10px);
-}
-
-    #viewerModal .viewer-sheet {
-      width: var(--popup-width) !important;
-      max-width: var(--popup-width) !important;
-      height: auto !important;
-      max-height: calc(var(--modal-vh) - 32px) !important;
-      margin: 0 auto !important;
-      padding: 0 !important;
-      background: transparent !important;
-      border: 0 !important;
-      border-radius: 0 !important;
-      box-shadow: none !important;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: visible;
-    }
-
-    #viewerModal .viewer-image-wrap img {
-      width: auto !important;
-      max-width: 100% !important;
-      height: auto !important;
-      max-height: calc(var(--modal-vh) - 32px) !important;
-      object-fit: contain !important;
-      border-radius: 24px !important;
-      background: transparent !important;
-    }
-.map-links {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 10px;
-  padding: 16px 0 0;
-  background: transparent;
-}
-
-    .map-link {
-  border: 1px solid rgba(44, 44, 44, 0.06);
-  height: 40px !important;
-  color: var(--text-strong);
-  display: flex;
-  align-items: center;
-  justify-content: center !important;
-  text-decoration: none;
-  font-size: var(--font-small);
-  font-weight: 300;
-  background: rgba(255, 255, 255, 0.86);
-  border-radius: 999px;
-  box-shadow: 0 8px 18px rgba(44, 44, 44, 0.045);
-  backdrop-filter: blur(12px);
-  letter-spacing: -0.03em;
-  position: relative;
-  overflow: hidden;
-  line-height: 1;
-  width: 100% !important;
-  min-width: 0 !important;
-}
-
-    .guide-tabs {
-  background: rgba(255, 255, 255, 0.45);
-  border-radius: 999px;
-  padding: 5px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  margin-bottom: 22px !important;
-  align-items: center;
-  box-shadow: none;
-}
-
-    .guide-tab {
-  border: 0;
-  background: transparent;
-  color: var(--text-soft);
-  font-size: var(--font-small) !important;
-  font-weight: 300 !important;
-  height: 44px !important;
-  width: 100%;
-  border-radius: 999px;
-  cursor: pointer;
-  box-shadow: none;
-  transition: background 0.22s ease,
-        color 0.22s ease,
-        transform 0.16s ease,
-        box-shadow 0.22s ease;
-  white-space: nowrap;
-}
-
-    .guide-tab.is-emoji {
-  font-size: var(--font-small) !important;
-}
-
-    #guide-meal.guide-content {
-      padding-top: 19px !important;
-    }
-
-    .gallery-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 8px !important;
-  align-items: stretch;
-  grid-auto-rows: auto !important;
-  grid-auto-flow: row dense;
-}
-
-    .gallery-item,
-    .gallery-item.featured-wide,
-    .gallery-item.featured-tall,
-    .gallery-item.featured-square,
-    .gallery-item.mag-wide,
-    .gallery-item.mag-square,
-    .gallery-item.mag-tall,
-    .gallery-square-item,
-    .gallery-more-cell {
-      grid-column: span 1 !important;
-      grid-row: span 1 !important;
-      aspect-ratio: 1 / 1 !important;
-      display: block;
-      position: relative;
-      padding: 0 !important;
-    }
-
-    .gallery-item.hidden {
-  display: none !important;
-}
-
-    .gallery-thumb {
-  width: 100% !important;
-  aspect-ratio: 1 / 1 !important;
-  height: 100% !important;
-  background: var(--surface-soft);
-  border-radius: 0 !important;
-  overflow: hidden;
-  cursor: pointer;
-  position: relative;
-  box-shadow: none !important;
-}
-
-    .gallery-thumb img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  transform: scale(1.04) !important;
-  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-    .gallery-more-cell {
-  aspect-ratio: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 0;
-  grid-column: 1 / -1;
-  padding: 10px 0 0;
-  grid-row: span 1;
-  background: rgba(245, 245, 247, 0.9);
-  cursor: pointer;
-}
-
-    .gallery-more .btn-rect {
-      display: none !important;
-    }
-
-    .fig-caption {
-  margin-top: 9px;
-  font-size: 11px !important;
-  color: rgba(255,255,255,0.94) !important;
-  padding-left: 2px;
-  font-weight: 200;
-  position: absolute !important;
-  top: 8px !important;
-  left: 9px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  line-height: 1 !important;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.28) !important;
-  pointer-events: none;
-  z-index: 2 !important;
-}
-
-    .gallery-more-cell .fig-caption {
-      display: none !important;
-    }
-
-    #viewerModal .viewer-next {
-      right: 8px !important;
-    }
-
-    /* === Final refinements: guide top alignment, timeline spacing, gallery hard reset === */
-
-    .guide-content.active {
-  display: block !important;
-}
-
-    .guide-main-copy {
-      margin: 0 !important;
-    }
-
-    #timelineModal .timeline-line-list .timeline-desc {
-  font-size: 13px;
-  line-height: 1.5 !important;
-  color: var(--text);
-}
-
-    .gallery-shell {
-  width: min(350px, calc(100vw - 48px)) !important;
-  max-width: 350px !important;
-  margin: 0 auto !important;
-  background: transparent;
-  border-radius: 0;
-  padding: 0;
-  overflow: visible !important;
-}
-
-    .gallery-grid#galleryGrid {
-      display: grid !important;
-      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-      grid-auto-flow: row !important;
-      grid-auto-rows: auto !important;
-      gap: 7px !important;
-      width: 100% !important;
-      align-items: stretch !important;
-      justify-items: stretch !important;
-    }
-
-    .gallery-grid#galleryGrid > .gallery-item,
-    .gallery-grid#galleryGrid > .gallery-item.gallery-square-item,
-    .gallery-grid#galleryGrid > .gallery-more-cell {
-      position: relative !important;
-      display: block !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      aspect-ratio: 1 / 1 !important;
-      grid-column: auto / span 1 !important;
-      grid-row: auto / span 1 !important;
-      overflow: hidden !important;
-      background: transparent !important;
-    }
-
-    .gallery-grid#galleryGrid > .gallery-item.hidden {
-      display: none !important;
-    }
-
-    .gallery-grid#galleryGrid .gallery-thumb {
-      position: absolute !important;
-      inset: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      aspect-ratio: 1 / 1 !important;
-      border-radius: 0 !important;
-      overflow: hidden !important;
-      background: var(--surface-soft) !important;
-    }
-
-    .gallery-grid#galleryGrid .gallery-thumb img {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
-      display: block !important;
-      transform: none !important;
-    }
-
-    .gallery-grid#galleryGrid > .gallery-more-cell {
-      background: rgba(245, 245, 247, 0.92) !important;
-      cursor: pointer !important;
-    }
-
-    .gallery-grid#galleryGrid > .gallery-more-cell .gallery-more {
-      position: absolute !important;
-      inset: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
+    .closing-actions {
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
-      transform: none !important;
-    }
-
-    #viewerModal .viewer-prev {
-  left: 10px !important;
-  display: flex !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-#foodModal .food-modal-content,
-    #timelineModal .timeline-modal-content {
-      padding-top: 30px !important;
-      justify-content: flex-start !important;
-      overflow: hidden !important;
-    }
-
-    #foodModal .food-modal-title,
-    #timelineModal .timeline-modal-title {
-      font-size: 18px !important;
-      line-height: 1.35 !important;
-      font-weight: 300 !important;
-      color: var(--text-strong) !important;
+      gap: 10px !important;
+      margin-top: 58px !important;
+      flex-wrap: wrap !important;
       text-align: center !important;
-      margin: 0 0 28px !important;
     }
 
-    #foodModal .food-basic-list {
-      flex: 0 1 auto !important;
-    }
-
-    /* Guide panels: same top position, fixed panel, less-emphasized menu section */
-
-    .guide-menu-card {
-  width: 100%;
-  margin: 20px auto 0 !important;
-  padding: 14px 0 0 !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  text-align: center !important;
-  margin-top: 14px !important;
-  max-width: 260px !important;
-  border-top: 1px solid rgba(44, 44, 44, 0.14) !important;
-}
-
-    .guide-menu-title {
-  color: var(--text-strong) !important;
-  font-size: var(--font-body) !important;
-  font-weight: 300 !important;
-  margin-bottom: 8px !important;
-  text-align: center !important;
-  margin: 0 0 8px !important;
-  line-height: 1.55 !important;
-}
-
-    .guide-menu-row {
-  display: grid !important;
-  grid-template-columns: 42px 1fr !important;
-  gap: 14px;
-  align-items: baseline !important;
-  color: var(--text);
-  font-size: var(--font-small);
-  line-height: 1.55 !important;
-  justify-content: stretch;
-  text-align: left !important;
-  min-height: 30px;
-  column-gap: 9px !important;
-}
-
-    .guide-menu-row span,
-    .guide-menu-row strong {
-  font-size: var(--font-body) !important;
-  font-weight: 200 !important;
-  line-height: 1.55 !important;
-}
-
-    .guide-menu-row span {
-  color: var(--text-soft) !important;
-  font-weight: 300;
-  min-width: 0;
-  text-align: center;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 24px;
-  border-radius: 999px;
-  background: rgba(236, 34, 31, 0.075);
-  font-size: 13px;
-}
-
-    .guide-menu-row strong {
-  color: var(--text) !important;
-  font-weight: 200;
-  text-align: left;
-  display: block;
-  font-size: var(--font-small);
-}
-#guide-meal .guide-main-copy {
-      margin-bottom: 26px !important;
-    }
-
-    #guide-meal .guide-menu-card {
-      margin-top: 26px !important;
-      padding-top: 22px !important;
-    }
-.btn-rect::after,
-    .timeline-open-btn {
-      font-family: inherit !important;
-    }
-
-    .guide-wrap {
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto;
-  background: var(--surface-soft);
-  border-radius: var(--radius-card);
-  padding: 8px 8px 18px !important;
-  box-shadow: inset 0 0 0 1px rgba(44, 44, 44, 0.03);
-  height: 272px !important;
-  min-height: 272px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  box-sizing: border-box !important;
-  touch-action: pan-y !important;
-}
-
-    .guide-content {
-  min-height: 174px !important;
-  display: none !important;
-  text-align: center !important;
-  font-size: var(--font-body);
-  line-height: 1.72 !important;
-  color: var(--text);
-  padding: 22px 14px 0 !important;
-  font-weight: 200;
-  padding-top: 22px;
-  height: 174px !important;
-  max-height: 174px !important;
-  overflow: hidden !important;
-  box-sizing: border-box !important;
-  align-content: initial !important;
-}
-
-    #guide-meal.guide-content,
-    #guide-rain.guide-content,
-    #guide-flower.guide-content {
-  padding-top: 22px !important;
-}
-
-    .guide-ending-emoji {
-      display: inline-block !important;
-      font-size: 17px !important;
-      line-height: 1 !important;
-      margin-top: 0 !important;
-    }
-
-    .food-category-head .food-category-title {
-      margin: 0 !important;
-      font-size: var(--font-body) !important;
-      line-height: 1.4 !important;
-      font-weight: 300 !important;
-    }
-
-    .food-category-item.open .food-category-toggle {
-      transform: rotate(180deg) !important;
-    }
-
-    .food-category-item.open .food-place-list {
-      display: grid !important;
-    }
-
-    .food-place {
-      color: var(--text) !important;
-      font-size: var(--font-small) !important;
-      font-weight: 200 !important;
-      line-height: 1.45 !important;
-    }
-
-    .food-place span {
-      color: var(--accent) !important;
-      font-weight: 300 !important;
-      margin-right: 6px !important;
-    }
-
-    .food-place.muted {
-      color: var(--text-soft) !important;
-    }
-
-    .gallery-subtitle {
-  margin: -12px auto 34px;
-  display: flex;
-  align-items: center !important;
-  justify-content: center;
-  gap: 7px;
-  text-align: center;
-  line-height: 22px;
-  width: 100%;
-}
-
-    .gallery-subtitle-text {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 24px !important;
-  height: 24px !important;
-}
-
-    #viewerModal #viewerImage {
-      transform-origin: center center !important;
-      transition: transform 0.12s ease !important;
-      will-change: transform !important;
-      image-rendering: auto !important;
-    }
-
-    .video-box {
-  aspect-ratio: 16 / 10;
-  background: var(--surface-soft);
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-soft);
-  font-size: var(--font-body);
-  box-shadow: var(--shadow-soft);
-  overflow: hidden;
-  position: relative !important;
-}
-
-    .video-play-overlay.hidden {
-      opacity: 0 !important;
-      pointer-events: none !important;
-    }
-
-    .video-play-overlay::before,
-    .video-play-overlay::after {
-      display: none !important;
-      content: none !important;
-    }
-
-    .video-play-icon path {
-      fill: var(--accent) !important;
-      stroke: none !important;
-      filter: none !important;
-      box-shadow: none !important;
-    }
-
-    .video-box video::-webkit-media-controls-start-playback-button {
-      display: none !important;
-      -webkit-appearance: none !important;
-    }
-.share-action-btn {
+    .share-action-btn {
       border: 1px solid rgba(236, 34, 31, 0.18) !important;
       background: rgba(255, 255, 255, 0.72) !important;
       color: var(--accent) !important;
       border-radius: 999px !important;
       min-height: 36px !important;
       padding: 8px 15px !important;
-      font-size: var(--font-small) !important;
+      font-size: var(--font-14) !important;
       font-weight: 300 !important;
       line-height: 1 !important;
       cursor: pointer !important;
@@ -1759,360 +1169,21 @@
       backdrop-filter: blur(12px) !important;
       -webkit-backdrop-filter: blur(12px) !important;
       transition: transform 0.14s ease, background 0.14s ease !important;
+      width: fit-content !important;
+      min-width: 156px !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex: 0 0 auto !important;
+      white-space: nowrap !important;
     }
 
     .share-action-btn:active {
       transform: scale(0.97) !important;
       background: rgba(255, 255, 255, 0.92) !important;
     }
-.food-category-toggle {
-  width: 20px !important;
-  height: 20px !important;
-  flex: 0 0 20px !important;
-  border: 0 !important;
-  position: relative !important;
-  display: inline-flex !important;
-  transform: none !important;
-  transition: transform 0.18s ease !important;
-  background: transparent !important;
-  align-self: center !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-    .food-category-toggle::before {
-  content: "" !important;
-  position: absolute !important;
-  left: 50% !important;
-  top: 50% !important;
-  width: 12px !important;
-  height: 12px !important;
-  border-right: 1.4px solid var(--accent) !important;
-  border-bottom: 1.4px solid var(--accent) !important;
-  border-radius: 1.5px !important;
-  transform: translate(-50%, -55%) rotate(45deg) !important;
-  box-sizing: border-box !important;
-  border-right-width: 1.4px !important;
-  border-bottom-width: 1.4px !important;
-}
-
-    .food-category-item.open .food-category-toggle::before {
-      transform: translate(-50%, -42%) rotate(225deg) !important;
-    }
-
-    .video-play-overlay::before {
-      display: none !important;
-      content: none !important;
-    }
-
-    .video-play-overlay:active {
-  transform: translate(-50%, -50%) scale(0.97) !important;
-  background: var(--accent-dark) !important;
-}
-
-    .video-play-icon {
-  width: 34px !important;
-  height: 38px !important;
-  margin: 0 0 0 4px !important;
-  display: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  filter: none !important;
-  overflow: visible !important;
-}
-.food-place-detail:first-child {
-      border-top: 0 !important;
-      padding-top: 0 !important;
-    }
-
-    .video-play-overlay {
-  position: absolute !important;
-  left: 50% !important;
-  top: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  appearance: none !important;
-  -webkit-appearance: none !important;
-  width: auto !important;
-  height: 36px !important;
-  padding: 7px 8px 7px 16px !important;
-  margin: 0 !important;
-  border: 0 !important;
-  border-radius: 999px !important;
-  background: var(--accent) !important;
-  background-color: var(--accent) !important;
-  box-shadow: var(--shadow-red) !important;
-  filter: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  outline: none !important;
-  cursor: pointer !important;
-  z-index: 2 !important;
-  -webkit-tap-highlight-color: transparent !important;
-  min-height: 36px !important;
-  color: var(--white) !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 10px !important;
-  font-size: var(--font-small) !important;
-  font-weight: 300 !important;
-  line-height: 1 !important;
-}
-
-    .video-play-overlay span {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  height: 20px !important;
-  line-height: 20px !important;
-  white-space: nowrap !important;
-}
-
-    .closing-actions .share-action-btn {
-      min-width: 156px !important;
-    }
-
-    /* 여긴가1 */
-.food-category-head {
-  width: 100% !important;
-  min-height: 50px !important;
-  padding: 12px 16px !important;
-  border: 0 !important;
-  background: transparent !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 12px !important;
-  cursor: pointer !important;
-  color: var(--text-strong) !important;
-  text-align: left !important;
-  font-family: inherit !important;
-  padding-top: 13px !important;
-  padding-bottom: 13px !important;
-}
-
-    .food-category-item .food-place-list {
-  display: none !important;
-  padding: 0 16px 16px !important;
-  gap: 10px !important;
-}
-
-    .food-place-detail {
-  display: block !important;
-  padding: 0 !important;
-  line-height: 1.45 !important;
-  border-top: 0 !important;
-}
-/* 맛집 이름, 설명 갭 */
-
-    .food-address {
-  margin-top: 2px !important;
-  margin-left: 55px !important;
-  color: var(--text-soft) !important;
-  font-size: 12px !important;
-  font-weight: 200 !important;
-  line-height: 1.45 !important;
-  display: none !important;
-}
-
-    .closing-actions {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 10px !important;
-  margin-top: 58px !important;
-  flex-wrap: wrap !important;
-}
-#viewerModal .viewer-nav:active {
-  color: rgba(255, 255, 255, 0.92) !important;
-}
-
-    #viewerModal .viewer-prev,
-    #viewerModal .viewer-next {
-      transform: translateY(-50%) !important;
-    }
-
-    .video-play-overlay::after {
-  content: "›" !important;
-  width: 21px !important;
-  height: 21px !important;
-  flex: 0 0 21px !important;
-  border-radius: 50% !important;
-  background: var(--white) !important;
-  color: var(--accent) !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-size: 19px !important;
-  font-weight: 300 !important;
-  line-height: 1 !important;
-  transform: translateY(-0.5px) !important;
-  transform-origin: center !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  min-width: 21px !important;
-  min-height: 21px !important;
-  aspect-ratio: 1 / 1 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  box-sizing: border-box !important;
-  font-family: inherit !important;
-}
-
-    .btn-rect::after {
-  content: "" !important;
-  width: 21px !important;
-  height: 21px !important;
-  border-radius: 50% !important;
-  background: linear-gradient(var(--accent), var(--accent)) center / 9px 1.35px no-repeat,
-        linear-gradient(var(--accent), var(--accent)) center / 1.35px 9px no-repeat,
-        var(--white) !important;
-  color: var(--accent);
-  display: inline-block !important;
-  align-items: center;
-  justify-content: center;
-  font-family: inherit;
-  font-size: 17px;
-  font-weight: 300;
-  line-height: 1 !important;
-  flex: 0 0 21px !important;
-  text-align: center;
-  transform: none !important;
-  min-width: 21px !important;
-  min-height: 21px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  box-sizing: border-box !important;
-}
-
-    .btn-rect.small::after {
-  width: 20px !important;
-  height: 20px !important;
-  line-height: 20px;
-  flex-basis: 20px !important;
-  font-size: 16px;
-  min-width: 20px !important;
-  min-height: 20px !important;
-  background: linear-gradient(var(--accent), var(--accent)) center / 8.5px 1.3px no-repeat,
-        linear-gradient(var(--accent), var(--accent)) center / 1.3px 8.5px no-repeat,
-        var(--white) !important;
-}
-
-    .btn-rect.no-plus::after {
-  display: none !important;
-  content: none !important;
-}
-
-    .couple-card .btn-rect,
-    .food-center-btn .btn-rect {
-      align-items: center !important;
-    }
-
-    .timeline-open-btn {
-  width: 20px !important;
-  height: 20px !important;
-  border: 0;
-  border-radius: 50% !important;
-  background: var(--accent);
-  color: transparent;
-  font-family: inherit;
-  font-size: 0 !important;
-  font-weight: 300;
-  line-height: 0 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0 !important;
-  cursor: pointer;
-  transform: none !important;
-  box-shadow: none;
-  min-width: 20px !important;
-  aspect-ratio: 1 / 1;
-  position: relative !important;
-  min-height: 20px !important;
-  margin: 0 !important;
-  vertical-align: middle;
-  overflow: hidden !important;
-  align-self: center !important;
-  flex: 0 0 20px !important;
-}
-
-    .timeline-open-btn::before,
-    .timeline-open-btn::after {
-  content: "" !important;
-  position: absolute !important;
-  left: 50% !important;
-  top: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  background: var(--white) !important;
-  border-radius: 999px !important;
-  display: block !important;
-}
-
-    .timeline-open-btn::before {
-  content: "+";
-  display: block;
-  color: var(--white);
-  font-family: inherit;
-  font-size: 17px;
-  font-weight: 300;
-  line-height: 1;
-  transform: translateY(-0.5px);
-  width: 8.5px !important;
-  height: 1.25px !important;
-}
-
-    .timeline-open-btn::after {
-  width: 1.25px !important;
-  height: 8.5px !important;
-}
-
-    .timeline-open-btn:active {
-  transform: scale(0.94) !important;
-}
-
-    .gallery-more {
-  text-align: center;
-  padding: 0;
-  transform: none !important;
-  width: 100% !important;
-  height: 100% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  color: var(--accent);
-  font-size: var(--font-small);
-  font-weight: 300;
-  gap: 5px !important;
-  line-height: 1 !important;
-}
-
-    .gallery-more span {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  height: 20px !important;
-  line-height: 20px !important;
-}
-
-    .gallery-more::after {
-  content: "" !important;
-  margin-left: 0 !important;
-  font-size: 16px;
-  line-height: 20px !important;
-  display: inline-block !important;
-  align-items: center !important;
-  justify-content: center !important;
-  height: 10px !important;
-  transform: none !important;
-  width: 10px !important;
-  flex: 0 0 10px !important;
-  margin: 0 !important;
-  background: linear-gradient(var(--accent), var(--accent)) center / 10px 1.35px no-repeat,
-        linear-gradient(var(--accent), var(--accent)) center / 1.35px 10px no-repeat !important;
-  align-self: center !important;
-  box-sizing: border-box !important;
-}
 
     /* === Music control popup === */
     .music-toggle {
@@ -2138,22 +1209,11 @@
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       cursor: pointer;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transform: translateY(10px);
-      transition:
-        opacity 0.28s ease,
-        visibility 0.28s ease,
-        transform 0.28s ease,
-        background 0.18s ease;
-    }
-
-    body.music-control-visible .music-toggle {
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
-      transform: translateY(0);
+      transform: none;
+      transition: opacity 0.28s ease, visibility 0.28s ease, transform 0.28s ease, background 0.18s ease;
     }
 
     .music-toggle:active {
@@ -2180,156 +1240,39 @@
       background: rgba(89, 89, 89, 0.55);
     }
 
-    /* === Disable photo zoom interactions === */
-    #viewerModal #viewerImage,
-    #viewerModal .viewer-image-wrap img {
-      transform: none !important;
-      transition: none !important;
-      user-select: none !important;
-      -webkit-user-drag: none !important;
-      -webkit-touch-callout: none !important;
-    }
-
-    #viewerModal .viewer-image-wrap {
-  width: 100% !important;
-  max-width: var(--popup-width) !important;
-  height: auto !important;
-  max-height: calc(var(--modal-vh) - 32px) !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border-radius: 24px !important;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  touch-action: pan-y !important;
-}
-
-    /* 1. 모달 활성화 시 배경 터치 스크롤 원천 차단 */
+    /* modal 공통 */
     body.modal-open {
       overflow: hidden;
       touch-action: auto;
     }
-/* 1. Buttons: content-based width and centered content group */
-    .btn-rect,
-    .btn-rect.small,
-    .food-center-btn .btn-rect,
-    .couple-card .btn-rect,
-    .share-action-btn,
-    .closing-actions .share-action-btn {
-      width: fit-content !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-      display: inline-flex !important;
+
+    .modal {
+      position: fixed;
+      inset: auto 0 auto 0;
+      display: none;
+      z-index: 999;
+      top: var(--modal-vtop);
+      height: var(--modal-vh);
+    }
+
+    .modal.show {
+      display: flex !important;
       align-items: center !important;
       justify-content: center !important;
-      flex: 0 0 auto !important;
-      white-space: nowrap !important;
+      padding: 0 !important;
     }
 
-    .btn-rect,
-    .btn-rect.small,
-    .food-center-btn .btn-rect,
-    .couple-card .btn-rect {
-      padding: 7px 8px 7px 16px !important;
-      gap: 9px !important;
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.36);
+      backdrop-filter: blur(12px);
     }
 
-    .btn-rect.no-plus,
-    .btn-rect.small.no-plus {
-      width: fit-content !important;
-      min-width: 0 !important;
-      padding: 9px 16px !important;
-      justify-content: center !important;
-    }
-
-    .couple-card,
-    .food-center-btn,
-    .modal-bottom-btn,
-    .closing-actions {
+    .modal-bottom-btn {
       text-align: center !important;
     }
 
-    /* 2. Four-level typography system */
-    .entry-flap-title,
-    .title,
-    .date-line,
-    .location-address,
-    .couple-name {
-      font-size: var(--font-21) !important;
-    }
-
-    .entry-guide, .desc, .intro-message, .location-detail, .wedding-count-text, .gallery-subtitle, .account-subtitle, .closing-text, .closing-heart, .opening-icon, .guide-tab, .guide-content, .guide-ending-emoji, .food-modal-desc, .timeline-modal-title, .timeline-marker, .viewer-counter{
-      font-size: var(--font-16) !important;
-    }
-
-    .couple-family, .btn-rect, .btn-rect.small, .map-link, .account-tab, .account-role, .account-name, .bank-name, .account-number, .food-category-title, .timeline-date, .timeline-title, .timeline-desc, .share-action-btn, .calendar-grid div{
-      font-size: var(--font-14) !important;
-    }
-
-    /* Keep icons visually balanced without creating extra text levels */
-    .person-actions .icon-btn {
-      font-size: 18px !important;
-    }
-
-    /* Prevent small-screen media rules from changing the four-level system */
-
-    /* 3. Unified popup shell: same visual size, never larger than viewport */
-
-    #foodModal .food-modal-content, #timelineModal .timeline-modal-content{
-  height: 100% !important;
-  min-height: 0 !important;
-  box-sizing: border-box !important;
-  display: flex !important;
-  flex-direction: column !important;
-  overflow: hidden !important;
-}
-
-    /* Food popup: intro fixed, gray list box scrolls, close button always visible */
-
-    .food-scroll-box {
-      flex: 1 1 auto !important;
-      min-height: 0 !important;
-      width: 100% !important;
-      padding: 16px 12px 24px !important;
-      border-radius: 22px !important;
-      background: rgba(245, 245, 247, 0.76) !important;
-      box-shadow: inset 0 0 0 1px rgba(44, 44, 44, 0.035) !important;
-      overflow-y: auto !important;
-      overscroll-behavior: contain !important;
-      touch-action: pan-y !important;
-      -webkit-overflow-scrolling: touch !important;
-      box-sizing: border-box !important;
-    }
-
-    #foodModal .modal-bottom-btn {
-      margin-top: 22px !important;
-    }
-
-    /* Timeline popup: no scrolling; distribute all items within available height */
-/* 21px: section titles and key information */
-    .title,
-    .date-line,
-    .location-address,
-    .couple-name {
-      font-size: var(--font-21) !important;
-    }
-
-    /* 16px: main copy, popup headings and primary supporting text */
-    .entry-flap-title, .opening-icon, .desc, .intro-message, .location-detail, .wedding-count-text, .gallery-subtitle, .account-subtitle, .closing-text, .closing-heart, .guide-content, .guide-ending-emoji, .food-modal-desc, .timeline-modal-title, .timeline-marker{
-      font-size: var(--font-16) !important;
-    }
-
-    /* 14px: tabs, information rows, popup body text and standard actions */
-    .entry-guide, .couple-family, .map-link, .guide-tab, .calendar-grid div, .food-category-title, .viewer-counter, .timeline-date, .timeline-title, .timeline-desc, .account-tab, .account-role, .account-name, .bank-name, .account-number, .share-action-btn{
-      font-size: var(--font-14) !important;
-    }
-
-    /* 12px: compact buttons, kickers and small auxiliary information */
-
-    /* Bottom close buttons keep the existing physical button size. */
     .modal-bottom-btn .btn-rect,
     .modal-bottom-btn .btn-rect.small,
     .modal-bottom-btn .btn-rect.no-plus {
@@ -2338,481 +1281,833 @@
       padding: 9px 16px !important;
     }
 
-    /* Viewer arrows are a visual control rather than body typography. */
-
-    /* Keep the four-level typography identical across narrow screens. */
-
-    /* Timeline: same soft gray card language as the profile essay box. */
-
-    @media (max-height: 700px) {
-      #foodModal .modal-sheet, #timelineModal .modal-sheet{
-        padding-top: 26px !important;
-        padding-bottom: 20px !important;
-      }
-
-      #foodModal .food-modal-content, #timelineModal .timeline-modal-content{
-        padding-top: 14px !important;
-      }
-
-      #foodModal .food-modal-desc {
-        margin-bottom: 16px !important;
-      }
-
-      #foodModal .modal-bottom-btn, #timelineModal .modal-bottom-btn{
-        margin-top: 14px !important;
-      }
-
-      #timelineModal .timeline-modal-content {
-        padding-top: 14px !important;
-      }
-
-      #timelineModal .timeline-modal-title {
-  margin-bottom: 12px !important;
-}
-
-      #timelineModal .timeline-scroll-box {
-        padding: 13px 15px !important;
-      }
-
-      #timelineModal .timeline-line-list {
-        gap: 7px !important;
-      }
-
-      #timelineModal .timeline-line-list .timeline-item {
-  grid-template-columns: 30px minmax(0, 1fr) !important;
-  gap: 10px !important;
-}
-
-      #timelineModal .timeline-marker {
-  width: 30px !important;
-  height: 30px !important;
-  flex-basis: 30px !important;
-}
-
-      #timelineModal .timeline-line-list::before {
-  left: 14px !important;
-  top: 30px !important;
-  bottom: 30px !important;
-}
-
-      #timelineModal .timeline-head {
-        margin-bottom: 2px !important;
-      }
-
-      #timelineModal .timeline-desc {
-  line-height: 1.32 !important;
-}
-
-      #timelineModal .modal-bottom-btn {
-        margin-top: 12px !important;
-      }
-    }
-/* === 2026-07-14 requested detail refinements === */
-    /* 1. Cover title: 19px, light weight */
-
-    /* 3. Wedding-day subtle pulse: about 1px expansion on each side */
-    .calendar-grid .wedding-day {
-  width: 28px;
-  height: 28px;
-  margin: auto;
-  background: var(--accent);
-  color: var(--white);
-  border-radius: 50%;
-  font-weight: 300;
-  box-shadow: none;
-  transform-origin: center !important;
-  animation: weddingDayMicroPulse 1.9s ease-in-out infinite !important;
-}
-
-    @keyframes weddingDayMicroPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.07); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      .scroll-reveal,
-      .reveal-child {
-        opacity: 1 !important;
-        transform: none !important;
-        filter: none !important;
-        transition: none !important;
-      }
-    
-      .calendar-grid .wedding-day {
-        animation: none !important;
-      }
-    }
-
-    /* 4. Flower notice: first line red, second line black */
-    #guide-flower .guide-red-line {
-      color: var(--accent) !important;
-    }
-
-    #guide-flower .guide-black-line {
-      color: var(--text) !important;
-      font-weight: 200 !important;
-    }
-
-    /* 5-8. Food popup typography, centered geometric chevron, wrapping comments */
-
-    #foodModal .food-category-toggle {
-  width: 20px !important;
-  height: 20px !important;
-  flex: 0 0 20px !important;
-  border: 0 !important;
-  position: relative !important;
-  display: block !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: transparent !important;
-  color: var(--accent) !important;
-  font-family: inherit !important;
-  font-size: 18px !important;
-  font-weight: 300 !important;
-  line-height: 1 !important;
-  transform: none !important;
-  transition: transform 0.18s ease !important;
-  overflow: visible !important;
-}
-
-    #foodModal .food-category-toggle::before {
-  content: "" !important;
-  position: absolute !important;
-  display: block !important;
-  width: 8px !important;
-  height: 8px !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-  color: var(--accent) !important;
-  font-family: inherit !important;
-  font-size: 18px !important;
-  font-weight: 300 !important;
-  line-height: 1 !important;
-  transform: translate(-50%, -65%) rotate(45deg) !important;
-  box-sizing: border-box !important;
-  left: 50% !important;
-  top: 50% !important;
-  border-right: 1.4px solid var(--accent) !important;
-  border-bottom: 1.4px solid var(--accent) !important;
-  transform-origin: center !important;
-}
-
-    #foodModal .food-category-item.open .food-category-toggle {
-  transform: none !important;
-}
-
-    #foodModal .food-category-item.open .food-category-toggle::before {
-  transform: translate(-50%, -35%) rotate(225deg) !important;
-}
-
-    /* 9. Timeline: compact card, no marker circle, square emoji */
-
-    /* 10. Photo viewer controls */
-    #viewerModal .viewer-nav {
-  display: flex !important;
-  z-index: 12 !important;
-  color: rgba(255, 255, 255, 0.78) !important;
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  font-size: 21px !important;
-  width: 44px !important;
-  height: 44px !important;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.20) !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0 !important;
-  -webkit-backdrop-filter: none !important;
-  font-family: inherit !important;
-  font-weight: 200 !important;
-  line-height: 1 !important;
-}
-
-    #viewerModal .viewer-counter {
-      font-size: 12px !important;
-    }
-
-    /* 12. Close X buttons */
     .close-x,
     .viewer-close {
-  position: absolute;
-  right: 17px;
-  top: 13px;
-  width: 32px;
-  height: 32px;
-  border: 0;
-  background: transparent;
-  color: var(--accent);
-  font-size: 21px !important;
-  line-height: 1;
-  font-weight: 200;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-  padding: 0;
-}
-/* Cover title: match the main invitation title color. */
-    .entry-flap-title {
-  color: var(--text-strong) !important;
-  font-size: 19px !important;
-  font-weight: 300 !important;
-  letter-spacing: 0.22em;
-  line-height: 1;
-}
-
-    /* Cover guide: carets are separate visual elements and share the text's vertical center. */
-
-    .entry-guide-copy {
-      display: inline-block !important;
-      line-height: 1.45 !important;
-    }
-
-    .entry-guide-caret {
+      position: absolute;
+      right: 18px !important;
+      top: 18px !important;
+      width: 30px !important;
+      height: 30px !important;
+      border: 0;
+      background: transparent;
+      color: var(--accent) !important;
+      font-size: 21px !important;
+      line-height: 1 !important;
+      font-weight: 300 !important;
+      cursor: pointer;
       display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
-      width: 9px !important;
-      height: 1em !important;
-      color: var(--accent) !important;
-      font-size: 13px !important;
-      font-weight: 300 !important;
-      line-height: 1 !important;
-      transform: translateY(1px) !important;
-      flex: 0 0 9px !important;
+      z-index: 3;
+      padding: 0;
+      text-shadow: none !important;
+      box-shadow: none !important;
     }
 
-    /* Food list: first row = area + restaurant, second row = full-width comment. */
+    /* 맛집 팝업 */
+    #foodModal .modal-sheet {
+      width: var(--popup-mock-width) !important;
+      max-width: 398px !important;
+      height: var(--popup-mock-height) !important;
+      max-height: calc(100dvh - 32px) !important;
+      margin: 0 !important;
+      box-sizing: border-box !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      padding: 42px 28px 22px !important;
+      border-radius: 32px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      background: rgba(255,255,255,.97) !important;
+    }
+
+    #foodModal .food-modal-content {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      overflow: hidden !important;
+      height: 100% !important;
+      min-height: 0 !important;
+      padding: 40px 0 0 !important;
+      box-sizing: border-box !important;
+    }
+
+    #foodModal .food-modal-desc {
+      margin: 0 0 30px !important;
+      line-height: 1.5 !important;
+      flex: 0 0 auto !important;
+      font-size: var(--font-16) !important;
+      text-align: center !important;
+      font-weight: 200;
+      color: var(--text);
+    }
+
+    #foodModal .food-scroll-box {
+      width: var(--popup-inner-width) !important;
+      max-width: var(--popup-inner-width) !important;
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      margin: 0 auto !important;
+      padding: 14px 12px 18px !important;
+      border-radius: 24px !important;
+      background: var(--popup-soft) !important;
+      box-shadow: none !important;
+      overflow-y: auto !important;
+      overscroll-behavior: contain !important;
+      touch-action: pan-y !important;
+      -webkit-overflow-scrolling: touch !important;
+      box-sizing: border-box !important;
+    }
+
+    #foodModal .food-category-list {
+      gap: 14px !important;
+      display: grid !important;
+      padding: 0 0 2px !important;
+      margin: 0 !important;
+    }
+
+    #foodModal .food-category-item {
+      padding: 0 !important;
+      overflow: hidden !important;
+      background: rgba(255,255,255,.92) !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      border-radius: 18px !important;
+    }
+
+    #foodModal .food-category-head {
+      width: 100% !important;
+      min-height: 52px !important;
+      padding: 13px 16px !important;
+      border: 0 !important;
+      background: transparent !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 12px !important;
+      cursor: pointer !important;
+      color: var(--text-strong) !important;
+      text-align: left !important;
+      font-family: inherit !important;
+    }
+
+    #foodModal .food-category-title {
+      margin: 0 !important;
+      font-size: var(--font-16) !important;
+      font-weight: 200 !important;
+      line-height: 1.5 !important;
+      color: var(--text) !important;
+    }
+
+    #foodModal .food-category-toggle {
+      width: 20px !important;
+      height: 20px !important;
+      flex: 0 0 20px !important;
+      border: 0 !important;
+      position: relative !important;
+      display: block !important;
+      background: transparent !important;
+      transition: transform 0.18s ease !important;
+    }
+
+    #foodModal .food-category-toggle::before {
+      content: "" !important;
+      position: absolute !important;
+      display: block !important;
+      width: 8px !important;
+      height: 8px !important;
+      border-right: 1.4px solid var(--accent) !important;
+      border-bottom: 1.4px solid var(--accent) !important;
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -65%) rotate(45deg) !important;
+      box-sizing: border-box !important;
+      transform-origin: center !important;
+    }
+
+    #foodModal .food-category-item.open .food-category-toggle::before {
+      transform: translate(-50%, -35%) rotate(225deg) !important;
+    }
+
+    #foodModal .food-category-item .food-place-list {
+      display: none !important;
+      padding: 10px 16px 18px !important;
+      gap: 10px !important;
+    }
+
+    #foodModal .food-category-item.open .food-place-list {
+      display: grid !important;
+    }
 
     #foodModal .food-place-detail {
+      display: block !important;
       padding: 0 !important;
+      line-height: 1.45 !important;
       border: 0 !important;
     }
 
-    /* Timeline: softer marker circles, slightly wider rhythm, and precise connector ending. */
-
-    #timelineModal .timeline-line-list::before {
-  content: none !important;
-  position: absolute !important;
-  left: 13.5px !important;
-  top: 27px !important;
-  bottom: 27px !important;
-  width: 1px !important;
-  background: rgba(236, 34, 31, 0.16) !important;
-  z-index: 0 !important;
-  display: none !important;
-}
-
-    #timelineModal .modal-bottom-btn {
-  display: block !important;
-  flex-shrink: 0;
-  margin-top: 16px !important;
-  padding-top: 0 !important;
-  text-align: center !important;
-  flex: 0 0 auto !important;
-}
-:root {
-  --bg: #fbfbfd;
-  --surface: #ffffff;
-  --surface-soft: #f5f5f7;
-  --surface-deep: #eeeeef;
-  --black: #2C2C2C;
-  --gray: #595959;
-  --red: #EC221F;
-  --white: #FFFFFF;
-  --text: #2C2C2C;
-  --text-strong: #2C2C2C;
-  --text-soft: #595959;
-  --line: rgba(44, 44, 44, 0.09);
-  --shadow-soft: 0 18px 45px rgba(44, 44, 44, 0.06);
-  --shadow-red: 0 8px 18px rgba(236, 34, 31, 0.12);
-  --accent: #EC221F;
-  --accent-dark: #D61D1A;
-  --radius-card: 28px;
-  --radius-small: 18px;
-  --font-kicker: 13px;
-  --font-title: 21px;
-  --font-subtitle: 21px;
-  --font-body: 16px;
-  --font-small: 14px;
-  --font-button: 14px;
-  --font-name: 21px;
-  --popup-unified-width: calc(100vw - 32px);
-  --popup-unified-height: calc(100dvh - 48px);
-  --popup-edge: 16px;
-  --popup-vpad: 24px;
-  --popup-width: min(398px, calc(100vw - (var(--popup-edge) * 2)));
-  --modal-vh: 100dvh;
-  --modal-vtop: 0px;
-  --popup-fixed-height-target: 640px;
-  --popup-fixed-height: min(var(--popup-fixed-height-target), calc(var(--modal-vh) - 48px));
-  --font-21: clamp(17px, 5.38vw, 21px);
-  --font-16: clamp(13px, 4.10vw, 16px);
-  --font-14: clamp(11.5px, 3.58vw, 14px);
-  --font-12: clamp(10px, 3.07vw, 12px);
-  --popup-responsive-width: min(398px, calc(100vw - 32px));
-  --popup-responsive-height: min(640px, calc(100dvh - 32px));
-  --popup-mock-width: min(398px, calc(100vw - 32px));
-  --popup-mock-height: min(640px, calc(100dvh - 32px));
-  --popup-inner-width: min(326px, 100%);
-  --popup-soft: rgba(245, 245, 247, 0.82);
-}
-
-    /* Common popup frame */
-    #foodModal.modal.show, #timelineModal.modal.show{
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0 !important;
-}
-
-    #foodModal .modal-sheet, #timelineModal .modal-sheet{
-  width: var(--popup-mock-width) !important;
-  max-width: 398px !important;
-  height: var(--popup-mock-height) !important;
-  max-height: calc(100dvh - 32px) !important;
-  margin: 0 !important;
-  box-sizing: border-box !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-  padding: 42px 28px 22px !important;
-  border-radius: 32px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  background: rgba(255,255,255,.97) !important;
-}
-
-    #foodModal .close-x, #timelineModal .close-x{
-      top: 18px !important;
-      right: 18px !important;
-      width: 28px !important;
-      height: 28px !important;
-      color: var(--text-strong) !important;
-      font-size: 21px !important;
-      font-weight: 300 !important;
+    #foodModal .food-place-main {
+      display: grid !important;
+      grid-template-columns: 52px minmax(0, 1fr) !important;
+      grid-template-areas: "area name" ". comment" !important;
+      column-gap: 10px !important;
+      row-gap: 3px !important;
+      align-items: baseline !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      letter-spacing: normal !important;
     }
 
-    #foodModal .modal-bottom-btn, #timelineModal .modal-bottom-btn{
-  margin-top: 18px !important;
-  padding-top: 0 !important;
-  flex-shrink: 0 !important;
-  text-align: center !important;
-  flex: 0 0 auto !important;
-  margin: 18px 0 0 !important;
-  padding: 0 !important;
-}
-
-    #foodModal .modal-bottom-btn .btn-rect, #timelineModal .modal-bottom-btn .btn-rect{
-      min-height: 36px !important;
-      padding: 9px 17px !important;
-      font-size: 14px !important;
+    #foodModal .food-area {
+      grid-area: area !important;
+      margin: 0 !important;
+      color: var(--accent) !important;
+      font-size: var(--font-14) !important;
       font-weight: 300 !important;
-    }
-
-    /* Food popup */
-    #foodModal .food-modal-content {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-start !important;
-  overflow: hidden !important;
-  padding-top: 24px !important;
-  height: 100% !important;
-  min-height: 0 !important;
-  padding: 40px 0 0 !important;
-}
-
-    #foodModal .food-modal-desc {
-  margin-top: 0 !important;
-  margin-bottom: 22px !important;
-  line-height: 1.5 !important;
-  flex: 0 0 auto !important;
-  margin: 0 0 30px !important;
-  font-size: 16px !important;
-  text-align: center !important;
-}
-
-    #foodModal .food-category-item {
-  padding: 0 !important;
-  overflow: hidden !important;
-  background: rgba(255,255,255,.92) !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  border-radius: 18px !important;
-}
-
-    /* Timeline popup */
-    #timelineModal .timeline-modal-content {
-  padding-top: 24px !important;
-  height: 100% !important;
-  min-height: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-start !important;
-  box-sizing: border-box !important;
-  overflow: hidden !important;
-  padding: 42px 0 0 !important;
-}
-
-    #timelineModal .timeline-line-list .timeline-item:last-child::after {
-  height: 15px !important;
-  display: none !important;
-  content: none !important;
-}
-
-    #timelineModal .timeline-text {
-  padding-top: 0 !important;
-}
-
-    #timelineModal .timeline-date,
-    #timelineModal .timeline-title,
-    #timelineModal .timeline-desc {
-      font-size: 14px !important;
       line-height: 1.45 !important;
-    }
-/* Cover guide: plain text only */
-    .entry-guide-text {
-  display: inline-flex !important;
-  color: var(--accent) !important;
-  font-weight: 300 !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 7px !important;
-  line-height: 1.45 !important;
-}
-
-    /* Calendar day 3: subtle 2px-per-side pulse */
-    @keyframes weddingDayPulse2px {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.142857); }
+      white-space: nowrap !important;
     }
 
-    .calendar-grid .wedding-day,
-    .reveal-visible .calendar-grid .wedding-day {
-      animation: weddingDayPulse2px 1.65s ease-in-out 0.45s infinite !important;
-      transform-origin: center center !important;
+    #foodModal .food-name {
+      grid-area: name !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      color: var(--text-strong) !important;
+      font-size: var(--font-14) !important;
+      font-weight: 300 !important;
+      line-height: 1.45 !important;
+      word-break: keep-all !important;
+      overflow-wrap: break-word !important;
     }
 
-    /* Food accordion: category title hierarchy without changing intro copy */
+    #foodModal .food-comment {
+      grid-area: comment !important;
+      display: block !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      color: var(--text-soft) !important;
+      font-size: var(--font-14) !important;
+      font-weight: 200 !important;
+      font-style: normal !important;
+      line-height: 1.50 !important;
+      word-break: keep-all !important;
+      overflow-wrap: break-word !important;
+    }
 
-    /* Food places: first row = area + name, second row = comment aligned to name */
+    #foodModal .modal-bottom-btn {
+      margin: 18px 0 0 !important;
+      padding: 0 !important;
+      flex: 0 0 auto !important;
+    }
 
-    /* Timeline title: one line, day count only in red */
+    /* 타임라인 팝업 */
+    #timelineModal .modal-sheet {
+      width: var(--popup-mock-width) !important;
+      max-width: 398px !important;
+      height: var(--popup-mock-height) !important;
+      max-height: calc(100dvh - 32px) !important;
+      margin: 0 !important;
+      box-sizing: border-box !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      padding: 42px 28px 22px !important;
+      border-radius: 32px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      background: rgba(255,255,255,.97) !important;
+    }
+
+    #timelineModal .timeline-modal-content {
+      height: 100% !important;
+      min-height: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+      padding: 42px 0 0 !important;
+    }
+
+    #timelineModal .timeline-modal-title {
+      margin: 0 0 36px !important;
+      font-size: var(--font-16) !important;
+      line-height: 1.45 !important;
+      flex: 0 0 auto !important;
+      font-weight: 200 !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      color: var(--text);
+    }
 
     #timelineModal .timeline-modal-title strong {
       color: var(--accent) !important;
       font-weight: 300 !important;
     }
 
-    /* Timeline: tighter year-title pairing */
+    #timelineModal .timeline-scroll-box {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      width: var(--popup-inner-width) !important;
+      max-width: var(--popup-inner-width) !important;
+      margin: 0 auto !important;
+      padding: 24px 18px !important;
+      border-radius: 24px !important;
+      background: var(--popup-soft) !important;
+      box-shadow: none !important;
+      box-sizing: border-box !important;
+      display: flex !important;
+      align-items: stretch !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      overscroll-behavior: contain !important;
+      touch-action: pan-y !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: thin !important;
+      scrollbar-color: rgba(89, 89, 89, 0.24) transparent !important;
+    }
 
-    /* Emoji circles use exactly the same gray as the timeline card, without border */
+    #timelineModal .timeline-scroll-box::-webkit-scrollbar {
+      width: 4px !important;
+    }
+
+    #timelineModal .timeline-scroll-box::-webkit-scrollbar-track {
+      background: transparent !important;
+    }
+
+    #timelineModal .timeline-scroll-box::-webkit-scrollbar-thumb {
+      background: rgba(89, 89, 89, 0.22) !important;
+      border-radius: 999px !important;
+    }
+
+    #timelineModal .timeline-line-list {
+      max-width: none !important;
+      gap: 15px !important;
+      position: relative !important;
+      width: 100% !important;
+      margin: 12px 0 0 !important;
+      flex: 0 0 auto !important;
+      min-height: max-content !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      overflow: visible !important;
+      padding-right: 4px !important;
+    }
+
+    #timelineModal .timeline-line-list .timeline-item {
+      grid-template-columns: 34px minmax(0,1fr) !important;
+      gap: 10px !important;
+      position: relative !important;
+      z-index: 1 !important;
+      align-items: start !important;
+      flex: 0 0 auto !important;
+      display: grid !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      overflow: visible !important;
+      min-height: 0 !important;
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    #timelineModal .timeline-marker {
+      width: 34px !important;
+      height: 34px !important;
+      font-size: var(--font-16) !important;
+      background: rgba(245, 245, 247, 0.76) !important;
+      box-shadow: none !important;
+      border-radius: 50% !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      line-height: 1 !important;
+      z-index: 2 !important;
+      flex: 0 0 34px !important;
+      min-width: 34px !important;
+      min-height: 34px !important;
+      aspect-ratio: 1 / 1 !important;
+      padding: 0 !important;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
+      position: relative !important;
+      border: 0 !important;
+      align-self: start !important;
+      margin-top: 0 !important;
+    }
+
+    #timelineModal .timeline-line-list .timeline-item::after {
+      left: 16.5px !important;
+      top: 16px !important;
+      bottom: -15px !important;
+      background: rgba(236,34,31,.20) !important;
+      display: block !important;
+      content: "" !important;
+      position: absolute !important;
+      width: 1px !important;
+      height: auto !important;
+      z-index: 1 !important;
+    }
+
+    #timelineModal .timeline-line-list .timeline-item:last-child::after {
+      display: none !important;
+      content: none !important;
+    }
+
+    #timelineModal .timeline-text {
+      min-width: 0;
+      padding-top: 0 !important;
+    }
+
+    #timelineModal .timeline-head {
+      display: grid !important;
+      align-items: start !important;
+      gap: 4px !important;
+      line-height: 1.35;
+      min-width: 0;
+      grid-template-columns: 40px minmax(0,1fr) !important;
+      margin: 0 0 4px !important;
+    }
+
+    #timelineModal .timeline-date {
+      color: var(--accent) !important;
+      font-size: var(--font-14) !important;
+      font-weight: 200 !important;
+      line-height: 1.45 !important;
+      white-space: nowrap !important;
+    }
+
+    #timelineModal .timeline-title {
+      color: var(--text-strong) !important;
+      font-size: var(--font-14) !important;
+      font-weight: 300 !important;
+      line-height: 1.45 !important;
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+    }
+
+    #timelineModal .timeline-desc {
+      line-height: 1.42 !important;
+      color: var(--text-soft) !important;
+      font-size: var(--font-14) !important;
+      font-weight: 200 !important;
+      white-space: normal !important;
+      word-break: keep-all;
+    }
+
+    #timelineModal .modal-bottom-btn {
+      margin: 18px 0 0 !important;
+      padding: 0 !important;
+      text-align: center !important;
+      flex: 0 0 auto !important;
+    }
+
+    /* 프로필 모달 */
+    #profileModal .modal-sheet {
+      width: min(398px, calc(100vw - 32px)) !important;
+      max-width: 398px !important;
+      height: min(640px, calc(100dvh - 32px)) !important;
+      max-height: calc(100dvh - 32px) !important;
+      margin: 0 auto !important;
+      padding: 42px 28px 22px !important;
+      border-radius: 32px !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+      background: rgba(255, 255, 255, 0.97) !important;
+      box-sizing: border-box !important;
+    }
+
+    #profileModal .profile-layout {
+      height: 100% !important;
+      min-height: 0 !important;
+      padding: 34px 0 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    #profileModal .profile-content {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: hidden !important;
+    }
+
+    #profileModal .profile-summary {
+      width: min(326px, 100%) !important;
+      max-width: min(326px, 100%) !important;
+      margin: 0 auto !important;
+      padding: 0 8px !important;
+      display: grid !important;
+      grid-template-columns: 96px minmax(0, 1fr) !important;
+      grid-template-areas: "photo info" !important;
+      column-gap: 16px !important;
+      align-items: center !important;
+      flex: 0 0 auto !important;
+      box-sizing: border-box !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+    }
+
+    #profileModal .profile-photo-frame {
+      grid-area: photo !important;
+      position: relative !important;
+      display: block !important;
+      justify-self: start !important;
+      align-self: center !important;
+      width: 96px !important;
+      height: auto !important;
+      aspect-ratio: 3 / 4 !important;
+      margin: 0 !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: rgba(245, 245, 247, 0.72) !important;
+      box-shadow: none !important;
+      overflow: hidden !important;
+    }
+
+    #profileModal .profile-photo {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
+      object-fit: cover !important;
+      object-position: center center !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      opacity: 1 !important;
+    }
+
+    #profileModal .profile-photo-placeholder {
+      position: absolute !important;
+      inset: 0 !important;
+      display: none !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: rgba(245, 245, 247, 0.72) !important;
+      color: rgba(89, 89, 89, 0.52) !important;
+      font-size: 12px !important;
+      font-weight: 200 !important;
+      letter-spacing: -0.02em !important;
+    }
+
+    #profileModal .profile-photo-frame.is-empty .profile-photo {
+      display: none !important;
+    }
+
+    #profileModal .profile-photo-frame.is-empty .profile-photo-placeholder {
+      display: flex !important;
+    }
+
+    #profileModal .profile-info {
+      grid-area: info !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    #profileModal .profile-info-row {
+      display: grid !important;
+      grid-template-columns: 48px minmax(0, 1fr) !important;
+      gap: 7px !important;
+      align-items: start !important;
+      margin-bottom: 5px !important;
+      text-align: left !important;
+      line-height: 1.42 !important;
+    }
+
+    #profileModal .profile-info-row:last-child {
+      margin-bottom: 0 !important;
+    }
+
+    #profileModal .profile-label,
+    #profileModal .profile-value {
+      font-size: var(--font-16) !important;
+      line-height: 1.42 !important;
+      letter-spacing: 0 !important;
+      text-align: left !important;
+    }
+
+    #profileModal .profile-label {
+      color: var(--text-strong) !important;
+      font-weight: 300 !important;
+      white-space: nowrap !important;
+    }
+
+    #profileModal .profile-value {
+      min-width: 0 !important;
+      color: var(--text) !important;
+      font-weight: 200 !important;
+      white-space: normal !important;
+      word-break: keep-all !important;
+      overflow-wrap: break-word !important;
+    }
+
+    #profileModal .profile-body {
+      width: min(326px, 100%) !important;
+      max-width: min(326px, 100%) !important;
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      margin: 25px auto 0 !important;
+      padding: 20px 18px 24px !important;
+      border-radius: 24px !important;
+      background: var(--popup-soft, rgba(245, 245, 247, 0.82)) !important;
+      box-shadow: none !important;
+      overflow-y: auto !important;
+      overscroll-behavior: contain !important;
+      -webkit-overflow-scrolling: touch !important;
+      box-sizing: border-box !important;
+      color: var(--text) !important;
+      font-size: var(--font-16) !important;
+      font-weight: 200 !important;
+      line-height: 1.7 !important;
+      text-align: left !important;
+      white-space: pre-wrap !important;
+    }
+
+    #profileModal .profile-essay-copy {
+      display: block !important;
+      white-space: pre-wrap !important;
+      color: var(--text) !important;
+      font-size: var(--font-16) !important;
+      font-weight: 200 !important;
+      line-height: 1.7 !important;
+    }
+
+    #profileModal .profile-essay-copy strong {
+      color: var(--text-strong) !important;
+      font-weight: 300 !important;
+    }
+
+    #profileModal .modal-bottom-btn {
+      flex: 0 0 auto !important;
+      margin: 18px 0 0 !important;
+      padding: 0 !important;
+      text-align: center !important;
+      position: relative !important;
+      z-index: 2 !important;
+    }
+
+    /* 뷰어 모달 */
+    #viewerModal.modal.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--popup-edge);
+      height: var(--modal-vh);
+    }
+
+    #viewerModal .modal-backdrop {
+      background: rgba(0, 0, 0, 0.74);
+      backdrop-filter: blur(10px);
+    }
+
+    #viewerModal .viewer-sheet {
+      position: relative;
+      width: var(--popup-width) !important;
+      max-width: var(--popup-width) !important;
+      height: auto !important;
+      max-height: calc(var(--modal-vh) - 32px) !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      display: flex;
+      flex-direction: column;
+      box-shadow: none !important;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+    }
+
+    #viewerModal .viewer-close {
+      color: rgba(255, 255, 255, 0.96) !important;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.24) !important;
+    }
+
+    #viewerModal .viewer-counter {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.28);
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 12px !important;
+      font-weight: 300;
+      line-height: 1;
+      backdrop-filter: blur(10px);
+    }
+
+    #viewerModal .viewer-image-wrap {
+      width: 100% !important;
+      max-width: var(--popup-width) !important;
+      height: auto !important;
+      max-height: calc(var(--modal-vh) - 32px) !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: transparent !important;
+      border-radius: 24px !important;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      touch-action: pan-y !important;
+    }
+
+    #viewerModal .viewer-image-wrap img {
+      width: auto !important;
+      max-width: 100% !important;
+      height: auto !important;
+      max-height: calc(var(--modal-vh) - 32px) !important;
+      object-fit: contain !important;
+      border-radius: 24px !important;
+      background: transparent !important;
+      user-select: none !important;
+      -webkit-user-drag: none !important;
+      -webkit-touch-callout: none !important;
+      transform: none !important;
+      transition: none !important;
+    }
+
+    #viewerModal .viewer-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) !important;
+      width: 44px !important;
+      height: 44px !important;
+      border: 0 !important;
+      background: transparent !important;
+      color: rgba(255, 255, 255, 0.78) !important;
+      font-size: 21px !important;
+      font-weight: 200 !important;
+      line-height: 1 !important;
+      cursor: pointer;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-radius: 50%;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      padding: 0 !important;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.20) !important;
+      z-index: 12 !important;
+      font-family: inherit !important;
+    }
+
+    #viewerModal .viewer-prev {
+      left: 10px !important;
+    }
+
+    #viewerModal .viewer-next {
+      right: 8px !important;
+    }
+
+    .viewer-caption {
+      display: none;
+    }
+
+    .copy-toast {
+      position: fixed;
+      left: 50%;
+      bottom: auto;
+      transform: translate(-50%, calc(-50% + 14px));
+      opacity: 0;
+      z-index: 1200;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(44, 44, 44, 0.88);
+      color: var(--white);
+      font-size: var(--font-small);
+      font-weight: 300;
+      line-height: 1;
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+      backdrop-filter: blur(12px);
+      top: 50%;
+    }
+
+    .copy-toast.show {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+
+    :root {
+      --bg: #fbfbfd;
+      --surface: #ffffff;
+      --surface-soft: #f5f5f7;
+      --surface-deep: #eeeeef;
+      --black: #2C2C2C;
+      --gray: #595959;
+      --red: #EC221F;
+      --white: #FFFFFF;
+      --text: #2C2C2C;
+      --text-strong: #2C2C2C;
+      --text-soft: #595959;
+      --line: rgba(44, 44, 44, 0.09);
+      --shadow-soft: 0 18px 45px rgba(44, 44, 44, 0.06);
+      --shadow-red: 0 8px 18px rgba(236, 34, 31, 0.12);
+      --accent: #EC221F;
+      --accent-dark: #D61D1A;
+      --radius-card: 28px;
+      --radius-small: 18px;
+      --font-kicker: 13px;
+      --font-title: 21px;
+      --font-subtitle: 21px;
+      --font-body: 16px;
+      --font-small: 14px;
+      --font-button: 14px;
+      --font-name: 21px;
+      --popup-unified-width: calc(100vw - 32px);
+      --popup-unified-height: calc(100dvh - 48px);
+      --popup-edge: 16px;
+      --popup-vpad: 24px;
+      --popup-width: min(398px, calc(100vw - (var(--popup-edge) * 2)));
+      --modal-vh: 100dvh;
+      --modal-vtop: 0px;
+      --popup-fixed-height-target: 640px;
+      --popup-fixed-height: min(var(--popup-fixed-height-target), calc(var(--modal-vh) - 48px));
+      --font-21: clamp(17px, 5.38vw, 21px);
+      --font-16: clamp(13px, 4.10vw, 16px);
+      --font-14: clamp(11.5px, 3.58vw, 14px);
+      --font-12: clamp(10px, 3.07vw, 12px);
+      --popup-responsive-width: min(398px, calc(100vw - 32px));
+      --popup-responsive-height: min(640px, calc(100dvh - 32px));
+      --popup-mock-width: min(398px, calc(100vw - 32px));
+      --popup-mock-height: min(640px, calc(100dvh - 32px));
+      --popup-inner-width: min(326px, 100%);
+      --popup-soft: rgba(245, 245, 247, 0.82);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: none !important;
+      -webkit-text-size-adjust: 100% !important;
+      text-size-adjust: 100% !important;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 0 0 80px;
+      background: transparent;
+    }
 
     @media (max-width: 380px) {
       section {
@@ -2832,195 +2127,41 @@
 
       .intro-message {
         margin-bottom: 51px;
-        font-size: 15px;
       }
 
-      .title,
-      .date-line,
-      .location-address {
-        font-size: 21px;
-      }
-
-      .desc {
-        font-size: 15px;
-      }
-
-      .account-tab {
-        font-size: 13px;
-      }
-
-      .btn-rect.small {
-        width: 142px;
-        font-size: 12px;
-      }
-
-      .account-person-head {
-        padding-left: 14px;
-      }
-
-      .account-number-row {
-        grid-template-columns: 66px 1fr auto;
-        gap: 4px;
-        padding-left: 14px;
-        border-radius: 20px;
-      }
-
-      .bank-name,
-      .account-number {
-        font-size: 13px;
-      }
-    
       .intro-section {
-  min-height: 100svh;
-  padding-top: 8vh;
-  padding-bottom: 0;
-  justify-content: center;
-}
+        min-height: 100svh;
+        padding-top: 8vh;
+        padding-bottom: 0;
+        justify-content: center;
+      }
 
       .intro-section .title,
       .intro-message {
         margin-bottom: 51px;
       }
 
-      .guide-tab {
-  font-size: 15px;
-}
-
-      .guide-tab.is-emoji {
-  font-size: 18px;
-}
-
-      .gallery-more {
-        transform: translateY(-16px);
-      }
-
-      .gallery-grid {
-        grid-auto-rows: 39px;
-      }
-
-      .guide-menu-row {
-        grid-template-columns: 38px minmax(0, 1fr);
-        gap: 12px;
-      }
-
-      .guide-menu-row span {
-        width: 38px;
-      }
-    
-      .timeline-line-list {
-        max-width: 300px;
-      }
-
-      .timeline-line-list .timeline-item {
-        grid-template-columns: 32px minmax(0, 1fr);
-        gap: 12px;
-        padding-bottom: 26px;
-      }
-
-      .timeline-marker {
-        width: 32px;
-        height: 32px;
-        font-size: 17px;
-      }
-
-      .timeline-line-list .timeline-item::after {
-        left: 15px;
-        top: 36px;
-      }
-
-      #timelineModal.modal.show {
-        padding: 20px 0;
-      }
-
-      #timelineModal .modal-sheet {
-  width: calc(100% - 32px);
-  padding: 30px 22px 22px;
-  height: calc(100dvh - 40px);
-  max-height: calc(100dvh - 40px);
-}
-
-      #timelineModal .timeline-line-list::before {
-        left: 14px;
-        top: 32px;
-        bottom: 32px;
-      }
-
-      #timelineModal .timeline-line-list .timeline-desc {
-  font-size: 12.5px;
-  line-height: 1.42;
-}
-
-      #timelineModal .modal-bottom-btn {
-        margin-top: 18px;
-      }
-
-      #foodModal.modal.show, #timelineModal.modal.show{
-        padding: 20px 0;
-      }
-
-      :root {
-  --popup-unified-width: calc(100vw - 32px);
-  --popup-unified-height: calc(100dvh - 40px);
-  --popup-edge: 16px;
-  --popup-vpad: 20px;
-  --popup-fixed-height-target: 610px;
-}
-
-      #timelineModal .timeline-modal-content {
-  padding-top: 42px !important;
-}
-
-      #timelineModal .timeline-marker {
-  width: 32px !important;
-  height: 32px !important;
-  font-size: 16px !important;
-}
-
-      #timelineModal .timeline-line-list .timeline-item {
-  grid-template-columns: 32px minmax(0, 1fr) !important;
-  gap: 12px !important;
-  padding-bottom: 15px;
-}
-
-      #foodModal .food-modal-content,
-      #timelineModal .timeline-modal-content {
-        padding-top: 28px !important;
-      }
-
-      #foodModal .food-modal-title,
-      #timelineModal .timeline-modal-title {
-        margin-bottom: 24px !important;
-      }
-
       .guide-wrap {
-  height: 262px !important;
-  min-height: 262px !important;
-}
+        height: 262px !important;
+        min-height: 262px !important;
+      }
 
       .guide-content {
-  min-height: 164px !important;
-  padding-top: 28px;
-  height: 164px !important;
-  max-height: 164px !important;
-}
+        min-height: 164px !important;
+        padding-top: 28px;
+        height: 164px !important;
+        max-height: 164px !important;
+      }
 
       .share-action-btn {
         padding: 8px 13px !important;
         font-size: 13px !important;
       }
 
-      .food-address {
-        margin-left: 49px !important;
-      }
-
-      #foodModal .food-category-list {
-        gap: 15px !important;
-      }
-
       .closing-actions {
-  gap: 8px !important;
-  margin-top: 50px !important;
-}
+        gap: 8px !important;
+        margin-top: 50px !important;
+      }
 
       .timeline-open-btn {
         width: 19px !important;
@@ -3029,19 +2170,7 @@
         min-height: 19px !important;
         flex-basis: 19px !important;
       }
-    
-      .entry-card {
-        width: min(430px, 100vw);
-      }
 
-      .entry-fold-body {
-        padding-bottom: 38px;
-      }
-
-      .entry-guide {
-        font-size: 13px;
-      }
-    
       .music-toggle {
         right: 14px;
         bottom: 16px;
@@ -3049,700 +2178,51 @@
         padding: 7px 12px 7px 11px;
         font-size: 12.5px;
       }
-    
-      .entry-flap-title,
-      .title,
-      .date-line,
-      .location-address,
-      .couple-name {
-        font-size: var(--font-21) !important;
+
+      #foodModal .food-place-main {
+        grid-template-columns: 44px minmax(0, 1fr) !important;
+        column-gap: 8px !important;
       }
-
-      .entry-guide, .desc, .intro-message, .guide-tab, .guide-content, .timeline-modal-title, .timeline-desc{
-        font-size: var(--font-16) !important;
-      }
-
-      .title,
-      .date-line,
-      .location-address,
-      .couple-name {
-        font-size: var(--font-21) !important;
-      }
-
-      .entry-flap-title, .opening-icon, .desc, .intro-message, .location-detail, .wedding-count-text, .gallery-subtitle, .account-subtitle, .closing-text, .closing-heart, .guide-content, .guide-ending-emoji, .food-modal-desc, .timeline-modal-title, .timeline-marker{
-        font-size: var(--font-16) !important;
-      }
-
-      .entry-guide, .couple-family, .map-link, .guide-tab, .calendar-grid div, .food-category-title, .viewer-counter, .timeline-date, .timeline-title, .timeline-desc, .account-tab, .account-role, .account-name, .bank-name, .account-number, .share-action-btn{
-        font-size: var(--font-14) !important;
-      }
-
-      .entry-flap-title {
-  font-size: 19px !important;
-}
-
-      .entry-guide-text {
-        gap: 6px !important;
-      }
-
-      #timelineModal .timeline-scroll-box {
-  max-width: 286px !important;
-  padding: 18px 14px !important;
-}
-
-      #timelineModal .timeline-line-list {
-  max-width: 304px;
-  gap: 11px !important;
-}
-
-      #timelineModal .timeline-line-list .timeline-item::after {
-  left: 15px !important;
-  top: 37px !important;
-  bottom: -15px !important;
-  height: calc(100% + 11px) !important;
-}
-
-      #timelineModal .timeline-line-list .timeline-item:last-child::after {
-        height: 15px !important;
-      }
-
-      #timelineModal .timeline-modal-title {
-  margin-bottom: 32px !important;
-  font-size: 15px !important;
-}
-    }
-/* Red kicker/title spacing tightened */
-    .kicker {
-  text-align: center;
-  color: var(--accent);
-  font-size: var(--font-kicker);
-  font-weight: 300;
-  margin-bottom: 9px !important;
-  letter-spacing: -0.01em;
-}
-
-    .food-section .title,
-    .gallery-section .title,
-    .closing .title,
-    section.scroll-reveal .title,
-    section.scroll-reveal .date-line,
-    section.scroll-reveal .location-address {
-      margin-top: 0 !important;
     }
 
-    /* Remove red shadows from red buttons */
-    .btn-rect,
-    .btn-rect:hover,
-    .btn-rect:active,
-    .timeline-open-btn,
-    .timeline-open-btn:hover,
-    .timeline-open-btn:active {
-      box-shadow: none !important;
-      filter: none !important;
-    }
-
-    .btn-rect::before,
-    .btn-rect::after,
-    .timeline-open-btn::before,
-    .timeline-open-btn::after {
-      box-shadow: none !important;
-    }
-
-    /* Unified red close buttons */
-    #foodModal .close-x, #timelineModal .close-x, .viewer-close{
-      width: 30px !important;
-      height: 30px !important;
-      color: var(--accent) !important;
-      font-size: 21px !important;
-      font-weight: 300 !important;
-      line-height: 1 !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      text-shadow: none !important;
-      box-shadow: none !important;
-    }
-
-    /* Food popup: category title same style as intro copy, not bold */
-    #foodModal .food-category-title {
-  font-size: 16px !important;
-  font-weight: 200 !important;
-  line-height: 1.5 !important;
-  color: var(--text) !important;
-}
-
-    #foodModal .food-category-item.open .food-category-head {
-  background: transparent !important;
-}
-
-    /* Wider gap between category heading and first restaurant than between restaurants */
-    #foodModal .food-place-list {
-  gap: 11px !important;
-  padding: 4px 16px 18px !important;
-}
-
-    /* Timeline layout refinements */
-    #timelineModal .timeline-modal-title {
-  margin-bottom: 18px !important;
-  font-size: 16px !important;
-  line-height: 1.45 !important;
-  flex-shrink: 0;
-  flex: 0 0 auto !important;
-  margin: 0 0 36px !important;
-  font-weight: 200 !important;
-  text-align: center !important;
-  white-space: nowrap !important;
-}
-
-    #timelineModal .timeline-line-list .timeline-item {
-  grid-template-columns: 34px minmax(0,1fr) !important;
-  gap: 10px !important;
-  padding-bottom: 0 !important;
-  position: relative !important;
-  z-index: 1 !important;
-  align-items: start !important;
-  margin-bottom: 0 !important;
-  flex: 0 0 auto !important;
-  display: grid !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  overflow: visible !important;
-  min-height: 0 !important;
-}
-
-    #timelineModal .timeline-marker {
-  width: 34px !important;
-  height: 34px !important;
-  font-size: 17px !important;
-  background: rgba(245, 245, 247, 0.76) !important;
-  box-shadow: none !important;
-  border-radius: 50% !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  line-height: 1 !important;
-  z-index: 2 !important;
-  flex: 0 0 34px !important;
-  min-width: 34px !important;
-  min-height: 34px !important;
-  aspect-ratio: 1 / 1 !important;
-  padding: 0 !important;
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-  transform: none !important;
-  overflow: visible !important;
-  position: relative !important;
-  border: 0 !important;
-  align-self: start !important;
-  margin-top: 0 !important;
-}
-
-    #timelineModal .timeline-line-list .timeline-item::after {
-  left: 16.5px !important;
-  top: 16px !important;
-  bottom: -15px !important;
-  background: rgba(236,34,31,.20) !important;
-  display: block !important;
-  content: "" !important;
-  position: absolute !important;
-  width: 1px !important;
-  height: auto !important;
-  z-index: 1 !important;
-}
-
-    #timelineModal .timeline-head {
-  display: grid !important;
-  align-items: start !important;
-  gap: 4px !important;
-  margin-bottom: 3px !important;
-  line-height: 1.35;
-  min-width: 0;
-  grid-template-columns: 40px minmax(0,1fr) !important;
-  margin: 0 0 4px !important;
-}
-
-    #timelineModal .timeline-title {
-  color: var(--text-strong) !important;
-  font-weight: 300 !important;
-  white-space: normal !important;
-  overflow: visible !important;
-  text-overflow: clip !important;
-}
-
-    #timelineModal .timeline-desc {
-  line-height: 1.42 !important;
-  color: var(--text-soft) !important;
-  font-weight: 200 !important;
-  white-space: normal !important;
-}
-
-    /* Food popup: balanced card rhythm and clearer title-to-first-item spacing */
-    #foodModal .food-scroll-box {
-  width: var(--popup-inner-width) !important;
-  max-width: var(--popup-inner-width) !important;
-  flex: 1 1 auto !important;
-  min-height: 0 !important;
-  margin: 0 auto !important;
-  padding: 14px 12px 18px !important;
-  border-radius: 24px !important;
-  background: var(--popup-soft) !important;
-  box-shadow: none !important;
-  overflow-y: auto !important;
-  overscroll-behavior: contain !important;
-  -webkit-overflow-scrolling: touch !important;
-}
-
-    #foodModal .food-category-list {
-  gap: 14px !important;
-  display: grid !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  padding-bottom: 2px !important;
-}
-
-    #foodModal .food-category-head {
-  min-height: 52px !important;
-  padding: 13px 16px !important;
-}
-
-    #foodModal .food-place-list .food-place:first-child {
-  margin-top: 0 !important;
-}
-/* Food list: one line when it fits; comment drops below the restaurant name only when needed */
-    #foodModal .food-category-item .food-place-list,
-    #foodModal .food-category-item.open .food-place-list {
-  padding: 10px 16px 18px !important;
-  gap: 10px !important;
-}
-
-    /* Timeline years in red */
-    #timelineModal .timeline-date {
-  color: var(--accent) !important;
-  font-weight: 200 !important;
-  white-space: nowrap !important;
-}
-
-    /* Photo viewer close button stays white on the dark overlay */
-    #viewerModal .viewer-close,
-    .viewer-close {
-      color: rgba(255, 255, 255, 0.96) !important;
-      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.24) !important;
-    }
-/* Keep CSS font sizes consistent between iPhone Safari and Android Chrome. */
-    html {
-  scroll-behavior: smooth;
-  scroll-snap-type: none !important;
-  -webkit-text-size-adjust: 100% !important;
-  text-size-adjust: 100% !important;
-}
-
-    /* Make the gray timeline card itself vertically scrollable. */
-    #timelineModal .timeline-scroll-box {
-  flex: 1 1 auto !important;
-  min-height: 0 !important;
-  width: var(--popup-inner-width) !important;
-  max-width: var(--popup-inner-width) !important;
-  margin: 0 auto !important;
-  padding: 24px 18px !important;
-  border-radius: 24px !important;
-  background: var(--popup-soft) !important;
-  box-shadow: none !important;
-  overflow: hidden !important;
-  box-sizing: border-box !important;
-  display: flex !important;
-  align-items: stretch !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  overscroll-behavior: contain !important;
-  touch-action: pan-y !important;
-  -webkit-overflow-scrolling: touch !important;
-  scrollbar-width: thin !important;
-  scrollbar-color: rgba(89, 89, 89, 0.24) transparent !important;
-}
-
-    #timelineModal .timeline-scroll-box::-webkit-scrollbar {
-      width: 4px !important;
-    }
-
-    #timelineModal .timeline-scroll-box::-webkit-scrollbar-track {
-      background: transparent !important;
-    }
-
-    #timelineModal .timeline-scroll-box::-webkit-scrollbar-thumb {
-      background: rgba(89, 89, 89, 0.22) !important;
-      border-radius: 999px !important;
-    }
-
-    /* Content keeps its natural height so overflow produces an actual scroll range. */
-    #timelineModal .timeline-line-list {
-  max-width: none !important;
-  gap: 15px !important;
-  position: relative !important;
-  width: 100% !important;
-  margin: 0 !important;
-  flex: 0 0 auto !important;
-  min-height: max-content !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-start !important;
-  margin-top: 12px !important;
-  overflow: visible !important;
-  padding-right: 4px !important;
-}
-    
-    html,
-    body {
-      -webkit-text-size-adjust: 100% !important;
-      text-size-adjust: 100% !important;
-
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
-    }
-
-    button,
-    input,
-    textarea,
-    select {
-      -webkit-text-size-adjust: 100% !important;
-      text-size-adjust: 100% !important;
-    }
-
-    .wrap {
-  width: 100%;
-  max-width: 430px;
-  margin: 0 auto;
-  padding: 0 0 80px;
-  background: transparent;
-  margin-left: auto;
-  margin-right: auto;
-}
-    
-    /* === 팝업 내 텍스트 유동적 축소 (가로 330px 대응) === */
-    #foodModal .food-modal-desc, #foodModal .food-category-title, #timelineModal .timeline-modal-title{
-      font-size: var(--font-16) !important;
-    }
-
-    /* 380px 이하 좁은 화면에 지정된 고정 픽셀(px) 덮어쓰기 */
-#foodModal .food-place-main {
-      display: grid !important;
-      grid-template-columns: 52px minmax(0, 1fr) !important;
-      grid-template-areas:
-        "area name"
-        ". comment" !important;
-      column-gap: 10px !important;
-      row-gap: 3px !important;
-      align-items: baseline !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      letter-spacing: normal !important;
-    }
-
-    #foodModal .food-area {
-      grid-area: area !important;
-      margin: 0 !important;
-      color: var(--accent) !important;
-      font-size: var(--font-14) !important;
-      font-weight: 300 !important;
-      line-height: 1.45 !important;
-      white-space: nowrap !important;
-      letter-spacing: normal !important;
-    }
-
-    #foodModal .food-name {
-      grid-area: name !important;
-      min-width: 0 !important;
-      margin: 0 !important;
-      color: var(--text-strong) !important;
-      font-size: var(--font-14) !important;
-      font-weight: 300 !important;
-      line-height: 1.45 !important;
-      white-space: normal !important;
-      overflow: visible !important;
-      text-overflow: clip !important;
-      word-break: keep-all !important;
-      overflow-wrap: break-word !important;
-      letter-spacing: normal !important;
-    }
-
-    #foodModal .food-comment {
-      grid-area: comment !important;
-      display: block !important;
-      min-width: 0 !important;
-      margin: 0 !important;
-      color: var(--text-soft) !important;
-      font-size: var(--font-14) !important;
-      font-weight: 200 !important;
-      font-style: normal !important;
-      line-height: 1.50 !important;
-      white-space: normal !important;
-      overflow: visible !important;
-      text-overflow: clip !important;
-      word-break: keep-all !important;
-      overflow-wrap: break-word !important;
-      letter-spacing: normal !important;
-    }
-/* 프로필 관련 CSS는 이 블록 하나를 최종 기준으로 사용 */
-
-#profileModal.modal.show {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0 !important;
-}
-
-#profileModal .modal-sheet {
-  width: min(398px, calc(100vw - 32px)) !important;
-  max-width: 398px !important;
-  height: min(640px, calc(100dvh - 32px)) !important;
-  max-height: calc(100dvh - 32px) !important;
-  margin: 0 auto !important;
-  padding: 42px 28px 22px !important;
-  border-radius: 32px !important;
-  overflow: hidden !important;
-  display: flex !important;
-  flex-direction: column !important;
-  background: rgba(255, 255, 255, 0.97) !important;
-  box-sizing: border-box !important;
-}
-
-#profileModal .close-x {
-  top: 18px !important;
-  right: 18px !important;
-  width: 30px !important;
-  height: 30px !important;
-  color: var(--accent) !important;
-  font-size: 21px !important;
-  font-weight: 300 !important;
-  line-height: 1 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-shadow: none !important;
-  box-shadow: none !important;
-}
-
-#profileModal .profile-layout {
-  height: 100% !important;
-  min-height: 0 !important;
-  padding: 34px 0 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-start !important;
-  overflow: hidden !important;
-  box-sizing: border-box !important;
-}
-
-#profileModal .profile-content {
-  flex: 1 1 auto !important;
-  min-height: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  overflow: hidden !important;
-}
-
-#profileModal .profile-summary {
-  width: min(326px, 100%) !important;
-  max-width: min(326px, 100%) !important;
-  margin: 0 auto !important;
-  padding: 0 8px !important;
-  display: grid !important;
-  grid-template-columns: 96px minmax(0, 1fr) !important;
-  grid-template-areas: "photo info" !important;
-  column-gap: 16px !important;
-  align-items: center !important;
-  flex: 0 0 auto !important;
-  box-sizing: border-box !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-}
-
-#profileModal .profile-photo-frame {
-  grid-area: photo !important;
-  position: relative !important;
-  display: block !important;
-  justify-self: start !important;
-  align-self: center !important;
-  width: 96px !important;
-  height: auto !important;
-  aspect-ratio: 3 / 4 !important;
-  margin: 0 !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  background: rgba(245, 245, 247, 0.72) !important;
-  box-shadow: none !important;
-  overflow: hidden !important;
-}
-
-#profileModal .profile-photo-frame::before,
-#profileModal .profile-photo-frame::after {
-  display: none !important;
-  content: none !important;
-}
-
-#profileModal .profile-photo {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  display: block !important;
-  object-fit: cover !important;
-  object-position: center center !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  opacity: 1 !important;
-}
-
-#profileModal .profile-photo-placeholder {
-  position: absolute !important;
-  inset: 0 !important;
-  display: none !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: rgba(245, 245, 247, 0.72) !important;
-  color: rgba(89, 89, 89, 0.52) !important;
-  font-size: 12px !important;
-  font-weight: 200 !important;
-  letter-spacing: -0.02em !important;
-}
-
-#profileModal .profile-photo-frame.is-empty .profile-photo {
-  display: none !important;
-}
-
-#profileModal .profile-photo-frame.is-empty .profile-photo-placeholder {
-  display: flex !important;
-}
-
-#profileModal .profile-info {
-  grid-area: info !important;
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-#profileModal .profile-info-row {
-  display: grid !important;
-  grid-template-columns: 48px minmax(0, 1fr) !important;
-  gap: 7px !important;
-  align-items: start !important;
-  margin-bottom: 5px !important;
-  text-align: left !important;
-  line-height: 1.42 !important;
-}
-
-#profileModal .profile-info-row:last-child {
-  margin-bottom: 0 !important;
-}
-
-#profileModal .profile-label,
-#profileModal .profile-value {
-  font-size: var(--font-16) !important;
-  line-height: 1.42 !important;
-  letter-spacing: 0 !important;
-  text-align: left !important;
-}
-
-#profileModal .profile-label {
-  color: var(--text-strong) !important;
-  font-weight: 300 !important;
-  white-space: nowrap !important;
-}
-
-#profileModal .profile-value {
-  min-width: 0 !important;
-  color: var(--text) !important;
-  font-weight: 200 !important;
-  white-space: normal !important;
-  word-break: keep-all !important;
-  overflow-wrap: break-word !important;
-}
-
-#profileModal .profile-intro-title,
-#profileModal .profile-modal-title {
-  display: none !important;
-}
-
-#profileModal .profile-body {
-  width: min(326px, 100%) !important;
-  max-width: min(326px, 100%) !important;
-  flex: 1 1 auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  margin: 25px auto 0 !important;
-  padding: 20px 18px 24px !important;
-  border-radius: 24px !important;
-  background: var(--popup-soft, rgba(245, 245, 247, 0.82)) !important;
-  box-shadow: none !important;
-  overflow-y: auto !important;
-  overscroll-behavior: contain !important;
-  -webkit-overflow-scrolling: touch !important;
-  box-sizing: border-box !important;
-  color: var(--text) !important;
-  font-size: var(--font-16) !important;
-  font-weight: 200 !important;
-  line-height: 1.7 !important;
-  text-align: left !important;
-  text-justify: auto !important;
-  white-space: pre-wrap !important;
-}
-
-#profileModal .profile-essay-copy {
-  display: block !important;
-  white-space: pre-wrap !important;
-  color: var(--text) !important;
-  font-size: var(--font-16) !important;
-  font-weight: 200 !important;
-  line-height: 1.7 !important;
-}
-
-#profileModal .profile-essay-copy strong {
-  color: var(--text-strong) !important;
-  font-weight: 300 !important;
-}
-
-#profileModal .profile-essay-title {
-  display: block !important;
-  margin: 0 0 14px !important;
-  color: var(--accent) !important;
-  font-size: var(--font-16) !important;
-  font-weight: 300 !important;
-  line-height: 1.45 !important;
-}
-
-#profileModal .modal-bottom-btn {
-  flex: 0 0 auto !important;
-  margin: 18px 0 0 !important;
-  padding: 0 !important;
-  text-align: center !important;
-  position: relative !important;
-  z-index: 2 !important;
-}
-
-#profileModal .modal-bottom-btn .btn-rect,
-#profileModal .modal-bottom-btn .btn-rect.small,
-#profileModal .modal-bottom-btn .btn-rect.no-plus {
-  min-height: 36px !important;
-  padding: 9px 17px !important;
-  font-size: 14px !important;
-  font-weight: 300 !important;
-}
-
-@media (max-width: 380px), (max-height: 700px) {
-      #foodModal .modal-sheet, #timelineModal .modal-sheet{
+    @media (max-height: 700px), (max-width: 380px) {
+      #foodModal .modal-sheet, #timelineModal .modal-sheet, #profileModal .modal-sheet {
         padding: 36px 22px 18px !important;
       }
 
-      #foodModal .food-modal-content,
-      #timelineModal .timeline-modal-content {
+      #foodModal .food-modal-content, #timelineModal .timeline-modal-content {
         padding-top: 32px !important;
       }
 
       #foodModal .food-modal-desc {
         margin-bottom: 22px !important;
+      }
+
+      #foodModal .food-scroll-box {
+        padding: 12px 10px 16px !important;
+      }
+
+      #foodModal .food-category-list {
+        gap: 12px !important;
+      }
+
+      #foodModal .food-category-head {
+        min-height: 50px !important;
+        padding: 12px 14px !important;
+      }
+
+      #foodModal .food-category-item .food-place-list,
+      #foodModal .food-category-item.open .food-place-list {
+        padding: 8px 14px 15px !important;
+        gap: 10px !important;
+      }
+
+      #timelineModal .timeline-modal-title {
+        margin-bottom: 24px !important;
+      }
+
+      #timelineModal .timeline-scroll-box {
+        padding: 20px 16px !important;
       }
 
       #timelineModal .timeline-line-list {
@@ -3770,92 +2250,65 @@
         bottom: -9px !important;
       }
 
-      #foodModal .food-place-list {
-        padding: 2px 14px 16px !important;
-        gap: 10px !important;
-      }
-
-      #timelineModal .timeline-scroll-box {
-  padding: 20px 16px !important;
-}
-
       #timelineModal .timeline-head {
-  grid-template-columns: 38px minmax(0,1fr) !important;
-  gap: 3px !important;
-}
-
-      #foodModal .food-scroll-box {
-  padding: 12px 10px 16px !important;
-}
-
-      #foodModal .food-category-list {
-  gap: 12px !important;
-}
-
-      #foodModal .food-category-head {
-        min-height: 50px !important;
-        padding: 12px 14px !important;
+        grid-template-columns: 38px minmax(0,1fr) !important;
+        gap: 3px !important;
       }
 
-      #foodModal .food-category-item .food-place-list,
-      #foodModal .food-category-item.open .food-place-list {
-        padding: 8px 14px 15px !important;
-        gap: 10px !important;
+      #profileModal .profile-layout {
+        padding-top: 28px !important;
       }
 
-      /* Narrow screens: keep spacing readable; only the comment moves below when required */
-    
-      #timelineModal .timeline-modal-title{
-  margin-bottom: 24px !important;
-  font-size: var(--font-16) !important;
-}
-    
-      #foodModal .food-place-main {
-        grid-template-columns: 44px minmax(0, 1fr) !important;
-        column-gap: 8px !important;
+      #profileModal .profile-summary {
+        grid-template-columns: 84px minmax(0, 1fr) !important;
+        column-gap: 12px !important;
+        padding: 0 2px !important;
+      }
+
+      #profileModal .profile-photo-frame {
+        width: 84px !important;
+        aspect-ratio: 3 / 4 !important;
+      }
+
+      #profileModal .profile-info-row {
+        grid-template-columns: 43px minmax(0, 1fr) !important;
+        gap: 6px !important;
+      }
+
+      #profileModal .profile-body {
+        margin-top: 20px !important;
+        padding: 17px 16px 20px !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .scroll-reveal,
+      .reveal-child {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
       }
     
-  #profileModal .modal-sheet {
-    padding: 36px 22px 18px !important;
-  }
-
-  #profileModal .profile-layout {
-    padding-top: 28px !important;
-  }
-
-  #profileModal .profile-summary {
-    grid-template-columns: 84px minmax(0, 1fr) !important;
-    column-gap: 12px !important;
-    padding: 0 2px !important;
-  }
-
-  #profileModal .profile-photo-frame {
-    width: 84px !important;
-    aspect-ratio: 3 / 4 !important;
-  }
-
-  #profileModal .profile-info-row {
-    grid-template-columns: 43px minmax(0, 1fr) !important;
-    gap: 6px !important;
-  }
-
-  #profileModal .profile-body {
-    margin-top: 20px !important;
-    padding: 17px 16px 20px !important;
-  }
-}
-</style>
+      .calendar-grid .wedding-day {
+        animation: none !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
   <audio id="bgm" src="bgm.mp3" preload="auto" loop></audio>
-  <button class="music-toggle" id="musicToggle" type="button" onclick="toggleBgm()" aria-pressed="false" aria-label="배경음악 켜기" style="opacity: 1; visibility: visible; pointer-events: auto; transform: none;">
+  <button class="music-toggle" id="musicToggle" type="button" onclick="toggleBgm()" aria-pressed="false" aria-label="배경음악 켜기">
     <span class="music-toggle-icon" aria-hidden="true">♪</span>
     <span id="musicToggleText">음악 켜기</span>
   </button>
 
   <div class="wrap">
-
     <section class="intro-section scroll-reveal">
       <div class="opening-icon reveal-child" style="--delay: 0ms;">💌</div>
       <h2 class="title reveal-child" style="--delay: 120ms;">마음을 담아 초대드립니다</h2>
@@ -4327,78 +2780,78 @@
   </div>
     
   <div class="modal" id="timelineModal" aria-hidden="true">
-  <div class="modal-backdrop" onclick="closeTimelineModal()"></div>
-  <div class="modal-sheet">
-    <button class="close-x" onclick="closeTimelineModal()">×</button>
+    <div class="modal-backdrop" onclick="closeTimelineModal()"></div>
+    <div class="modal-sheet">
+      <button class="close-x" onclick="closeTimelineModal()">×</button>
 
-    <div class="timeline-modal-content">
-      <div class="timeline-modal-title">처음 만난 날부터, <strong id="timelineDayCount">0000</strong>일의 이야기</div>
+      <div class="timeline-modal-content">
+        <div class="timeline-modal-title">처음 만난 날부터, <strong id="timelineDayCount">0000</strong>일의 이야기</div>
 
-      <div class="timeline-scroll-box">
-        <div class="timeline-list timeline-line-list">
-        <div class="timeline-item">
-          <div class="timeline-marker" aria-hidden="true">⚽</div>
-          <div class="timeline-text">
-            <div class="timeline-head">
-              <span class="timeline-date">2017</span>
-              <span class="timeline-title">처음 인사를 나눈 날</span>
+        <div class="timeline-scroll-box">
+          <div class="timeline-list timeline-line-list">
+            <div class="timeline-item">
+              <div class="timeline-marker" aria-hidden="true">⚽</div>
+              <div class="timeline-text">
+                <div class="timeline-head">
+                  <span class="timeline-date">2017</span>
+                  <span class="timeline-title">처음 인사를 나눈 날</span>
+                </div>
+                <div class="timeline-desc">보규의 첫 대학 행사였던 동아리 개강총회 날, 우리는 우연히 같은 테이블에 앉았습니다.</div>
+              </div>
             </div>
-            <div class="timeline-desc">보규의 첫 대학 행사였던 동아리 개강총회 날, 우리는 우연히 같은 테이블에 앉았습니다.</div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker" aria-hidden="true">❤️</div>
+              <div class="timeline-text">
+                <div class="timeline-head">
+                  <span class="timeline-date">2018</span>
+                  <span class="timeline-title">우리라는 이름의 시작</span>
+                </div>
+                <div class="timeline-desc">익숙했던 마음을 조금 다르게 바라본 순간, 친구였던 우리는 연인이 되었습니다.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker" aria-hidden="true">✈️</div>
+              <div class="timeline-text">
+                <div class="timeline-head">
+                  <span class="timeline-date">2022</span>
+                  <span class="timeline-title">한국과 독일 사이</span>
+                </div>
+                <div class="timeline-desc">여덟 시간의 시차에도 매일 이어진 영상통화로 우리의 핸드폰은 독일 햇살보다 뜨거웠습니다.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker" aria-hidden="true">🎓</div>
+              <div class="timeline-text">
+                <div class="timeline-head">
+                  <span class="timeline-date">2023</span>
+                  <span class="timeline-title">단단해지는 마음</span>
+                </div>
+                <div class="timeline-desc">치열하고 힘들었던 학위 기간, 우리는 함께여서 견딜 수 있었고, 행복했습니다.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker" aria-hidden="true">💍</div>
+              <div class="timeline-text">
+                <div class="timeline-head">
+                  <span class="timeline-date">2025</span>
+                  <span class="timeline-title">발리에서의 프러포즈</span>
+                </div>
+                <div class="timeline-desc">한국에서부터 비밀리에 준비한 창수의 마음이 발리에서 보규에게 닿았습니다. 당연히 YES!</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="timeline-item">
-          <div class="timeline-marker" aria-hidden="true">❤️</div>
-          <div class="timeline-text">
-            <div class="timeline-head">
-              <span class="timeline-date">2018</span>
-              <span class="timeline-title">우리라는 이름의 시작</span>
-            </div>
-            <div class="timeline-desc">익숙했던 마음을 조금 다르게 바라본 순간, 친구였던 우리는 연인이 되었습니다.</div>
-          </div>
+        <div class="modal-bottom-btn">
+          <button class="btn-rect small no-plus" onclick="closeTimelineModal()">닫기</button>
         </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker" aria-hidden="true">✈️</div>
-          <div class="timeline-text">
-            <div class="timeline-head">
-              <span class="timeline-date">2022</span>
-              <span class="timeline-title">한국과 독일 사이</span>
-            </div>
-            <div class="timeline-desc">여덟 시간의 시차에도 매일 이어진 영상통화로 우리의 핸드폰은 독일 햇살보다 뜨거웠습니다.</div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker" aria-hidden="true">🎓</div>
-          <div class="timeline-text">
-            <div class="timeline-head">
-              <span class="timeline-date">2023</span>
-              <span class="timeline-title">단단해지는 마음</span>
-            </div>
-            <div class="timeline-desc">치열하고 힘들었던 학위 기간, 우리는 함께여서 견딜 수 있었고, 행복했습니다.</div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker" aria-hidden="true">💍</div>
-          <div class="timeline-text">
-            <div class="timeline-head">
-              <span class="timeline-date">2025</span>
-              <span class="timeline-title">발리에서의 프러포즈</span>
-            </div>
-            <div class="timeline-desc">한국에서부터 비밀리에 준비한 창수의 마음이 발리에서 보규에게 닿았습니다. 당연히 YES!</div>
-          </div>
-        </div>
-        </div>
-      </div>
-
-      <div class="modal-bottom-btn">
-        <button class="btn-rect small no-plus" onclick="closeTimelineModal()">닫기</button>
       </div>
     </div>
   </div>
-</div>
     
   <div class="modal" id="viewerModal" aria-hidden="true">
     <div class="modal-backdrop" onclick="closeViewer()"></div>
@@ -4418,9 +2871,9 @@
   </div>
 
   <div class="copy-toast" id="copyToast" role="status" aria-live="polite">복사되었습니다.</div>
-<script>
+
+  <script>
     let bgmUserPaused = true;
-    let audioUnlocked = false;
 
     function playBgm() {
       const bgm = document.getElementById("bgm");
@@ -4474,7 +2927,6 @@
       }
     }
 
-    // 백그라운드 전환 감지
     document.addEventListener("visibilitychange", () => {
       const bgm = document.getElementById("bgm");
       if (!bgm) return;
@@ -4735,7 +3187,8 @@
 무엇보다 보규는 제가 스스로를 믿지 못하는 순간에도 가장 먼저 저를 믿어준 사람입니다. 나보다 나를 더 믿어주는 보규를 보며 저 역시 다시 나 자신을 믿고 앞으로 나아갈 수 있었습니다. 보규를 만나기 전 무채색 같았던 제 삶은 함께한 9년 동안 온갖 색채로 물들었고, 긴 겨울을 지나 마침내 따뜻한 봄을 맞이할 수 있었습니다.
 
 <strong>그래서 결혼합니다.</strong>
-새로운 길에 용기 있게 도전하며 자신의 삶을 증명해 내고, 좋아하는 일에는 묵묵히 최선을 다하며, 제게는 언제나 흔들림 없는 믿음을 주는 사람. 무더운 여름날 손을 잡고 걷다 문득, 맞잡은 손의 열기가 아니라 내가 그토록 좋아하던 여름 날씨를 탓하게 되었던 그 순간 확신했습니다. 보규와 함께라면 계절의 무게도, 인생의 어떤 낯선 도전도 기꺼이 함께 감당하며 평생을 걸어갈 수 있겠다고. 그래서 결혼을 결심했습니다.`}
+새로운 길에 용기 있게 도전하며 자신의 삶을 증명해 내고, 좋아하는 일에는 묵묵히 최선을 다하며, 제게는 언제나 흔들림 없는 믿음을 주는 사람. 무더운 여름날 손을 잡고 걷다 문득, 맞잡은 손의 열기가 아니라 내가 그토록 좋아하던 여름 날씨를 탓하게 되었던 그 순간 확신했습니다. 보규와 함께라면 계절의 무게도, 인생의 어떤 낯선 도전도 기꺼이 함께 감당하며 평생을 걸어갈 수 있겠다고. 그래서 결혼을 결심했습니다.`
+      }
     };
 
     function handleProfilePhotoError(img) {
