@@ -367,6 +367,80 @@
       box-shadow: 0 8px 24px rgba(44, 44, 44, 0.06);
     }
 
+    /* 추가. 피로연 */
+    .reception-section {
+      min-height: 100svh;
+      padding: 88px 24px;
+      justify-content: center;
+    }
+
+    .reception-title strong {
+      font-weight: 400;
+      color: var(--text-strong);
+    }
+
+    .reception-message {
+      max-width: 330px;
+      margin: 0 auto 36px;
+      font-size: var(--font-16) !important;
+      line-height: 1.85;
+      color: var(--text);
+      font-weight: 200;
+    }
+
+    .reception-host {
+      display: inline-block;
+      color: var(--text-soft);
+      font-size: var(--font-14) !important;
+      font-weight: 300;
+    }
+
+    .reception-card {
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto;
+      padding: 24px 20px 20px;
+      background: var(--surface-soft);
+      border-radius: var(--radius-card);
+      box-shadow: inset 0 0 0 1px rgba(44, 44, 44, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .reception-info-row {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 10px;
+      align-items: baseline;
+      text-align: left;
+    }
+
+    .reception-label {
+      color: var(--accent) !important;
+      font-size: var(--font-14) !important;
+      font-weight: 300;
+      line-height: 1.45;
+    }
+
+    .reception-value {
+      color: var(--text-strong);
+      font-size: var(--font-14) !important;
+      font-weight: 300;
+      line-height: 1.45;
+    }
+
+    .reception-value.address {
+      color: var(--text-soft);
+      font-weight: 200;
+    }
+
+    .reception-map-links {
+      margin-top: 6px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
     /* 5. 맛집 */
     .food-section .title {
       margin-bottom: 16px;
@@ -3969,6 +4043,42 @@
             <span class="guide-black-line">축하의 마음만으로도 감사합니다.</span><br /><br />
             <span class="guide-ending-emoji">🌼</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reception-section scroll-reveal">
+      <div class="kicker reveal-child" style="--delay: 0ms;">피로연 안내</div>
+      <h2 class="title reception-title reveal-child" style="--delay: 100ms;"><strong>신랑 측 피로연 안내</strong></h2>
+
+      <p class="desc reception-message reveal-child" style="--delay: 200ms;">
+        거리가 멀어 예식에 참석하시기<br />
+        어려운 분들을 위해 혼례 후에<br />
+        피로연 자리를 마련하였습니다.<br /><br />
+        귀한 발걸음으로<br />
+        두 사람의 앞날을 축복하여 주시면<br />
+        더 큰 기쁨과 격려가 되겠습니다.<br /><br />
+        <span class="reception-host">김상두 · 윤옥례 배상</span>
+      </p>
+
+      <div class="reception-card reveal-child" style="--delay: 320ms;">
+        <div class="reception-info-row">
+          <span class="reception-label">일시</span>
+          <strong class="reception-value">2026년 10월 9일 금요일 11:00 ~ 14:00</strong>
+        </div>
+        <div class="reception-info-row">
+          <span class="reception-label">장소</span>
+          <strong class="reception-value">대갓집 숯불직화구이</strong>
+        </div>
+        <div class="reception-info-row">
+          <span class="reception-label">주소</span>
+          <span class="reception-value address">전남 광양시 광양읍 서천2길 27</span>
+        </div>
+
+        <div class="map-links reception-map-links">
+          <a class="map-link" href="https://map.naver.com/p/search/%EA%B4%91%EC%96%91%EC%9D%8D%20%EC%84%9C%EC%20%EC%B2%9C2%EA%B8%B8%2027" target="_blank" rel="noopener">네이버</a>
+          <a class="map-link" href="https://www.tmap.co.kr/search?searchKeyword=%EB%8C%80%EA%B0%93%EC%A7%91%20%EC%88%AF%EB%B6%88%EC%A7%81%ED%99%94%EA%B5%AC%EC%9D%B4" target="_blank" rel="noopener">티맵</a>
+          <a class="map-link" href="https://map.kakao.com/link/search/%EB%8C%80%EA%B0%93%EC%A7%91%20%EC%88%AF%EB%B6%88%EC%A7%81%ED%99%94%EA%B5%AC%EC%9D%B4" target="_blank" rel="noopener">카카오</a>
         </div>
       </div>
     </section>
