@@ -2114,196 +2114,6 @@
   box-sizing: border-box !important;
 }
 
-    /* === Entry screen: top-fold invitation gate + BGM start === */
-    body.entry-locked {
-      overflow: hidden;
-    }
-
-    .entry-screen {
-      --entry-open: 0;
-      position: fixed;
-      inset: 0;
-      z-index: 2000;
-      background:
-        radial-gradient(circle at top, #ffffff 0%, #fbfbfd 48%, #f5f5f7 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      transition:
-        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-        visibility 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .entry-screen.hide {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .entry-card {
-      width: min(430px, 100vw);
-      aspect-ratio: 0.72 / 1;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .entry-open-button {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      perspective: 1400px;
-    }
-
-    .entry-fold-card {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 100%;
-      height: 76%;
-      transform: translate(-50%, -50%);
-      filter: drop-shadow(0 22px 45px rgba(44, 44, 44, 0.08));
-      transition:
-        transform 1.25s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 1.05s cubic-bezier(0.22, 1, 0.36, 1),
-        filter 1.25s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .entry-card-base {
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.97);
-      border: 1px solid rgba(44, 44, 44, 0.048);
-      box-shadow: 0 12px 28px rgba(44, 44, 44, 0.045);
-      overflow: hidden;
-    }
-
-    .entry-card-base::before,
-    .entry-card-base::after {
-      content: none;
-    }
-
-    .entry-fold-body {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 0 24px 42px;
-      z-index: 1;
-    }
-
-    .entry-fold-body-copy {
-      display: none;
-    }
-
-    .entry-fold-flap {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 43%;
-      background: rgba(255, 255, 255, 0.985);
-      border: 1px solid rgba(44, 44, 44, 0.048);
-      border-bottom-color: rgba(44, 44, 44, 0.072);
-      transform-origin: top center;
-      transform-style: preserve-3d;
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition:
-        transform 1.35s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 1.15s cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 1.35s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 18px 34px rgba(44, 44, 44, 0.10), 0 6px 12px rgba(44, 44, 44, 0.08);
-      backface-visibility: hidden;
-      transform: rotateX(calc(var(--entry-open, 0) * -86deg));
-    }
-
-    .entry-fold-flap::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -1px;
-      height: 1px;
-      background: rgba(44, 44, 44, 0.08);
-    }
-
-    .entry-flap-rule {
-      display: none;
-    }
-
-    .entry-guide {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      text-align: center;
-      color: rgba(89, 89, 89, 0.82);
-      font-size: var(--font-small);
-      font-weight: 200;
-      line-height: 1.45;
-      pointer-events: none;
-      transition:
-        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .entry-guide-mark {
-      width: 22px;
-      height: 22px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent);
-      font-size: 20px;
-      font-weight: 300;
-      line-height: 1;
-      animation: entryGuideFloat 1.35s ease-in-out infinite;
-    }
-
-    @keyframes entryGuideFloat {
-      0%, 100% {
-        transform: translateY(0);
-        opacity: 0.7;
-      }
-      50% {
-        transform: translateY(5px);
-        opacity: 1;
-      }
-    }
-
-    .entry-screen.opening .entry-fold-flap {
-      transform: rotateX(-114deg);
-      opacity: 0.95;
-      box-shadow: 0 18px 30px rgba(44, 44, 44, 0.02);
-    }
-
-    .entry-screen.opening .entry-fold-card {
-      transform: translate(-50%, -50%) scale(1.018);
-      opacity: 0;
-      filter: drop-shadow(0 16px 30px rgba(44, 44, 44, 0.04)) blur(0.8px) brightness(1.04);
-    }
-
-    .entry-screen.opening .entry-guide {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-
     /* === Music control popup === */
     .music-toggle {
       position: fixed;
@@ -4037,30 +3847,12 @@
 </style>
 </head>
 
-<body class="entry-locked">
+<body>
   <audio id="bgm" src="bgm.mp3" preload="auto" loop></audio>
-  <button class="music-toggle" id="musicToggle" type="button" onclick="toggleBgm()" aria-pressed="false" aria-label="배경음악 끄기">
+  <button class="music-toggle" id="musicToggle" type="button" onclick="toggleBgm()" aria-pressed="false" aria-label="배경음악 켜기" style="opacity: 1; visibility: visible; pointer-events: auto; transform: none;">
     <span class="music-toggle-icon" aria-hidden="true">♪</span>
-    <span id="musicToggleText">음악 끄기</span>
+    <span id="musicToggleText">음악 켜기</span>
   </button>
-
-  <div class="entry-screen" id="entryScreen">
-    <div class="entry-card">
-      <button class="entry-open-button" type="button" aria-label="초대장 열기">
-        <div class="entry-fold-card" aria-hidden="true">
-          <div class="entry-card-base"></div>
-          <div class="entry-fold-body">
-            <div class="entry-guide">
-              <span class="entry-guide-text">살짝 밀어 청첩장을 열어주세요</span>
-            </div>
-          </div>
-          <div class="entry-fold-flap">
-            <div class="entry-flap-title">초대합니다</div>
-          </div>
-        </div>
-      </button>
-    </div>
-  </div>
 
   <div class="wrap">
 
@@ -4626,139 +4418,9 @@
   </div>
 
   <div class="copy-toast" id="copyToast" role="status" aria-live="polite">복사되었습니다.</div>
-
-  <script>
-
-    let invitationEntered = false;
-    let entryTouchStartY = 0;
-    let entryPullDistance = 0;
-    let bgmUserPaused = false;
-    let audioUnlocked = false; // 추가: 오디오 권한 획득 상태 플래그
-   
-    function unlockAudioContext() {
-      if (audioUnlocked) return;
-      audioUnlocked = true; // 중복 실행 방지를 위해 즉시 상태 변경
-  
-      const bgm = document.getElementById("bgm");
-      if (!bgm) return;
-
-      const playPromise = bgm.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-        // 초대장에 진입하지 않은 대기 상태일 때만 일시정지
-          if (!invitationEntered) {
-            bgm.pause();
-          } else if (!bgmUserPaused) {
-            updateMusicToggle();
-          }
-        }).catch(() => {
-          audioUnlocked = false; // 실패 시 다음 터치에서 재시도할 수 있도록 복구
-        });
-      }
-    }
-
-    function setEntryOpenProgress(progress) {
-      const entryScreen = document.getElementById("entryScreen");
-      if (!entryScreen) return;
-      const safeProgress = Math.max(0, Math.min(progress, 1));
-      entryScreen.style.setProperty("--entry-open", safeProgress.toFixed(3));
-    }
-
-    function updateEntryPull(distance) {
-      if (invitationEntered) return;
-      entryPullDistance = Math.max(0, Math.abs(distance));
-      const progress = Math.min(entryPullDistance / 160, 1);
-      setEntryOpenProgress(progress);
-      if (progress >= 0.28) enterInvitation();
-    }
-
-    function resetEntryPull() {
-      if (invitationEntered) return;
-      entryPullDistance = 0;
-      setEntryOpenProgress(0);
-    }
-
-    function setupEntryScrollGate() {
-      const entryScreen = document.getElementById("entryScreen");
-      if (!entryScreen) return;
-
-      // 추가: 화면 최초 터치/클릭 시 오디오 권한 획득 처리
-      window.addEventListener("touchstart", unlockAudioContext, { once: true, passive: true });
-      window.addEventListener("click", unlockAudioContext, { once: true, passive: true });
-
-      entryScreen.addEventListener("click", () => {
-        if (!invitationEntered) enterInvitation();
-      });
-
-      entryScreen.addEventListener("wheel", (e) => {
-        if (invitationEntered) return;
-        e.preventDefault();
-        updateEntryPull(entryPullDistance + Math.abs(e.deltaY));
-      }, { passive: false });
-
-      entryScreen.addEventListener("touchstart", (e) => {
-        if (invitationEntered || !e.touches.length) return;
-        entryTouchStartY = e.touches[0].clientY;
-        entryPullDistance = 0;
-      }, { passive: true });
-
-      entryScreen.addEventListener("touchmove", (e) => {
-        if (invitationEntered || !e.touches.length) return;
-        const distance = e.touches[0].clientY - entryTouchStartY;
-        e.preventDefault();
-        updateEntryPull(distance);
-      }, { passive: false });
-
-      entryScreen.addEventListener("touchend", () => {
-        if (!invitationEntered) enterInvitation();
-      }, { passive: true });
-    }
-
-    // 화면 잠금 및 백그라운드 전환 감지
-    document.addEventListener("visibilitychange", () => {
-      const bgm = document.getElementById("bgm");
-      if (!bgm) return;
-
-      if (document.hidden) {
-    // 화면이 꺼지거나 백그라운드로 이동하면 오디오 일시정지
-        bgm.pause();
-      } else {
-    // 화면 복귀 시, 사용자가 직접 끄지 않은 상태라면 재생 재개
-        if (invitationEntered && !bgmUserPaused) {
-          playBgm();
-        }
-      }
-    });
-
-    function enterInvitation() {
-      if (invitationEntered) return;
-      invitationEntered = true;
-
-      const entryScreen = document.getElementById("entryScreen");
-      const bgm = document.getElementById("bgm");
-
-      document.body.classList.remove("entry-locked");
-      document.body.classList.add("music-control-visible");
-
-      if (entryScreen) {
-        entryScreen.style.setProperty("--entry-open", "1");
-        entryScreen.classList.add("opening");
-
-        window.setTimeout(() => {
-          entryScreen.classList.add("hide");
-        }, 1050);
-
-        window.setTimeout(() => {
-          entryScreen.style.display = "none";
-        }, 1800);
-      }
-
-      if (bgm) {
-        bgmUserPaused = false;
-        playBgm();
-      }
-    }
-
+<script>
+    let bgmUserPaused = true;
+    let audioUnlocked = false;
 
     function playBgm() {
       const bgm = document.getElementById("bgm");
@@ -4812,16 +4474,26 @@
       }
     }
 
+    // 백그라운드 전환 감지
+    document.addEventListener("visibilitychange", () => {
+      const bgm = document.getElementById("bgm");
+      if (!bgm) return;
+
+      if (document.hidden) {
+        bgm.pause();
+      } else if (!bgmUserPaused) {
+        playBgm();
+      }
+    });
+
     const WEDDING_SHARE_URL = "https://1009.highglossyworks.life";
     const KAKAO_JAVASCRIPT_KEY = "acb700bb1f19c18ab35d6e5b38b402f9";
 
     function initKakaoShareSdk() {
       if (!window.Kakao) return false;
-
       if (!Kakao.isInitialized()) {
         Kakao.init(KAKAO_JAVASCRIPT_KEY);
       }
-
       return true;
     }
 
@@ -4864,19 +4536,16 @@
         return;
       }
       
-    const venueLocation =
-      new naver.maps.LatLng(35.21951419444281, 129.08203204013648);
-
-    const map = new naver.maps.Map("map", {
-      center: venueLocation,
-      zoom: 17,
-    });
-      
-    new naver.maps.Marker({
-      position: venueLocation,
-      map: map,
-    });
-  }
+      const venueLocation = new naver.maps.LatLng(35.21951419444281, 129.08203204013648);
+      const map = new naver.maps.Map("map", {
+        center: venueLocation,
+        zoom: 17,
+      });
+      new naver.maps.Marker({
+        position: venueLocation,
+        map: map,
+      });
+    }
 
     const MEET_DATE = "2018-10-13";
     const WEDDING_DATE = "2026-10-03";
@@ -5097,8 +4766,6 @@
 
       openModalBase("profileModal");
 
-      // 같은 프로필 모달을 신랑/신부가 공유하므로,
-      // 브라우저가 이전 스크롤 위치를 복원하지 못하도록 열린 뒤에도 한 번 더 초기화
       requestAnimationFrame(() => {
         if (essay) essay.scrollTop = 0;
       });
@@ -5107,7 +4774,6 @@
     function closeProfileModal() {
       closeModalBase("profileModal");
     }
-
 
     function openFoodModal() {
       openModalBase("foodModal");
@@ -5187,7 +4853,6 @@
 
     function renderViewer() {
       const image = galleryImages[currentViewerIndex];
-      
       document.getElementById("viewerImage").src = image.src;
       
       const viewerCaption = document.getElementById("viewerCaption");
@@ -5197,8 +4862,7 @@
       
       const counter = document.getElementById("viewerCounter");
       if (counter) {
-        counter.textContent =
-          (currentViewerIndex + 1) + " / " + galleryImages.length;
+        counter.textContent = (currentViewerIndex + 1) + " / " + galleryImages.length;
       }
     }
 
@@ -5213,9 +4877,7 @@
       }, { passive: true });
 
       swipeArea.addEventListener("touchmove", (e) => {
-        if (e.touches.length > 1) {
-          e.preventDefault();
-        }
+        if (e.touches.length > 1) e.preventDefault();
       }, { passive: false });
 
       swipeArea.addEventListener("touchend", (e) => {
@@ -5268,7 +4930,6 @@
         .catch(() => showCopyToast("복사에 실패했습니다."));
     }
 
-
     function getGuideOrder() {
       return ["flower", "meal", "rain"];
     }
@@ -5320,7 +4981,6 @@
 
       const isOpen = item.classList.toggle("open");
       btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
-
     }
 
     function setupVideoOverlay() {
@@ -5418,7 +5078,6 @@
     }
 
     updateDayCounts();
-    setupEntryScrollGate();
     initGuideTabs();
     setupGuideSwipe();
     setupViewerSwipe();
