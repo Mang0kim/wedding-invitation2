@@ -2729,7 +2729,7 @@
   --popup-soft: rgba(245, 245, 247, 0.82);
 }
     
-/* 피로연 팝업 모달 */
+/* 피로연 팝업 전용 스타일 (불필요한 빈 여백 제거) */
     #receptionModal.modal.show {
       display: flex !important;
       align-items: center !important;
@@ -2740,74 +2740,81 @@
     #receptionModal .modal-sheet {
       width: var(--popup-mock-width) !important;
       max-width: 398px !important;
-      height: var(--popup-mock-height) !important;
-      max-height: calc(100dvh - 32px) !important;
+      height: auto !important; /* 고정 높이 해제 */
+      min-height: 0 !important;
+      max-height: calc(100dvh - 48px) !important;
       margin: 0 !important;
       box-sizing: border-box !important;
       overflow: hidden !important;
-      padding: 20px 28px 10px 10px !important;
-      border-radius: 32px !important;
+      padding: 28px 20px 18px !important; /* 상하 패딩 최적화 */
+      border-radius: 28px !important;
       display: flex !important;
       flex-direction: column !important;
       background: rgba(255, 255, 255, 0.97) !important;
     }
 
     #receptionModal .reception-modal-content {
-      height: 100% !important;
+      height: auto !important;
       min-height: 0 !important;
       display: flex !important;
       flex-direction: column !important;
       justify-content: flex-start !important;
       overflow: hidden !important;
-      padding: 12px 0 0 !important;
+      padding: 0 !important; /* 상단 패딩 제거 */
+    }
+
+    #receptionModal .kicker {
+      margin-bottom: 2px !important;
     }
 
     #receptionModal .reception-modal-title {
-      font-size: var(--font-21) !important;
+      font-size: 19px !important;
       color: var(--text-strong);
       font-weight: 300;
       text-align: center;
-      margin: 0 0 14px !important;
+      margin: 0 0 12px !important;
     }
 
     #receptionModal .reception-modal-scroll {
-      flex: 1 1 auto !important;
+      flex: 0 1 auto !important; /* 빈 공간을 억지로 채우지 않도록 변경 */
       min-height: 0 !important;
       overflow-y: auto !important;
       overscroll-behavior: contain !important;
       -webkit-overflow-scrolling: touch !important;
       padding-right: 2px;
+      margin-bottom: 0 !important;
     }
 
     #receptionModal .reception-modal-desc {
       text-align: center;
-      font-size: var(--font-16) !important;
-      line-height: 1.8;
+      font-size: var(--font-14) !important;
+      line-height: 1.6 !important;
       color: var(--text);
-      margin: 0 0 22px !important;
+      margin: 0 0 12px !important;
       font-weight: 200;
     }
 
     #receptionModal .reception-host {
       display: inline-block;
       color: var(--text-soft);
-      font-size: var(--font-14) !important;
+      font-size: 13px !important;
       font-weight: 300;
+      margin-top: 2px;
     }
 
     #receptionModal .reception-modal-box {
       background: var(--popup-soft);
-      border-radius: 24px;
-      padding: 14px 14px 12px;
+      border-radius: 20px;
+      padding: 12px 14px 10px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 7px;
     }
 
     #receptionModal .reception-info-row {
       display: grid;
-      grid-template-columns: 42px minmax(0, 1fr);
-      gap: 10px;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 8px;
       align-items: baseline;
       text-align: left;
     }
@@ -2816,14 +2823,14 @@
       color: var(--accent) !important;
       font-size: var(--font-14) !important;
       font-weight: 300;
-      line-height: 1.45;
+      line-height: 1.4;
     }
 
     #receptionModal .reception-value {
       color: var(--text-strong);
       font-size: var(--font-14) !important;
       font-weight: 300;
-      line-height: 1.45;
+      line-height: 1.4;
     }
 
     #receptionModal .reception-value.address {
@@ -2832,9 +2839,16 @@
     }
 
     #receptionModal .reception-map-links {
-      margin-top: 6px;
-      padding-top: 12px;
+      margin-top: 2px !important;
+      padding-top: 8px !important;
       border-top: 1px solid var(--line);
+      gap: 8px !important;
+    }
+
+    #receptionModal .modal-bottom-btn {
+      margin-top: 10px !important; /* 닫기 버튼 상단 여백 대폭 축소 */
+      padding: 0 !important;
+      flex: 0 0 auto !important;
     }
     /* ▲▲▲ 피로연 팝업 CSS 끝 ▲▲▲ */
     
