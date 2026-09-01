@@ -2728,7 +2728,116 @@
   --popup-inner-width: min(326px, 100%);
   --popup-soft: rgba(245, 245, 247, 0.82);
 }
+    
+/* 피로연 팝업 모달 */
+    #receptionModal.modal.show {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 0 !important;
+    }
 
+    #receptionModal .modal-sheet {
+      width: var(--popup-mock-width) !important;
+      max-width: 398px !important;
+      height: var(--popup-mock-height) !important;
+      max-height: calc(100dvh - 32px) !important;
+      margin: 0 !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+      padding: 42px 28px 22px !important;
+      border-radius: 32px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      background: rgba(255, 255, 255, 0.97) !important;
+    }
+
+    #receptionModal .reception-modal-content {
+      height: 100% !important;
+      min-height: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      overflow: hidden !important;
+      padding: 24px 0 0 !important;
+    }
+
+    #receptionModal .reception-modal-title {
+      font-size: var(--font-21) !important;
+      color: var(--text-strong);
+      font-weight: 300;
+      text-align: center;
+      margin: 0 0 20px !important;
+    }
+
+    #receptionModal .reception-modal-scroll {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      overflow-y: auto !important;
+      overscroll-behavior: contain !important;
+      -webkit-overflow-scrolling: touch !important;
+      padding-right: 2px;
+    }
+
+    #receptionModal .reception-modal-desc {
+      text-align: center;
+      font-size: var(--font-16) !important;
+      line-height: 1.8;
+      color: var(--text);
+      margin: 0 0 22px !important;
+      font-weight: 200;
+    }
+
+    #receptionModal .reception-host {
+      display: inline-block;
+      color: var(--text-soft);
+      font-size: var(--font-14) !important;
+      font-weight: 300;
+    }
+
+    #receptionModal .reception-modal-box {
+      background: var(--popup-soft);
+      border-radius: 24px;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #receptionModal .reception-info-row {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 10px;
+      align-items: baseline;
+      text-align: left;
+    }
+
+    #receptionModal .reception-label {
+      color: var(--accent) !important;
+      font-size: var(--font-14) !important;
+      font-weight: 300;
+      line-height: 1.45;
+    }
+
+    #receptionModal .reception-value {
+      color: var(--text-strong);
+      font-size: var(--font-14) !important;
+      font-weight: 300;
+      line-height: 1.45;
+    }
+
+    #receptionModal .reception-value.address {
+      color: var(--text-soft);
+      font-weight: 200;
+    }
+
+    #receptionModal .reception-map-links {
+      margin-top: 6px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+    /* ▲▲▲ 피로연 팝업 CSS 끝 ▲▲▲ */
+    
     /* Common popup frame */
     #foodModal.modal.show, #timelineModal.modal.show{
   display: flex !important;
@@ -3545,6 +3654,8 @@
       overflow-wrap: break-word !important;
       letter-spacing: normal !important;
     }
+
+    
 /* 프로필 관련 CSS는 이 블록 하나를 최종 기준으로 사용 */
 
 #profileModal.modal.show {
@@ -4330,6 +4441,55 @@
     </section>
   </div>
 
+  <div class="modal" id="receptionModal" aria-hidden="true">
+    <div class="modal-backdrop" onclick="closeReceptionModal()"></div>
+    <div class="modal-sheet">
+      <button class="close-x" onclick="closeReceptionModal()">×</button>
+
+      <div class="reception-modal-content">
+        <div class="kicker">피로연 안내</div>
+        <h3 class="reception-modal-title">신랑 측 피로연 안내</h3>
+
+        <div class="reception-modal-scroll">
+          <p class="reception-modal-desc">
+            거리가 멀어 예식에 참석하시기<br />
+            어려운 분들을 위해 혼례 후에<br />
+            피로연 자리를 마련하였습니다.<br /><br />
+            귀한 발걸음으로<br />
+            두 사람의 앞날을 축복하여 주시면<br />
+            더 큰 기쁨과 격려가 되겠습니다.<br /><br />
+            <span class="reception-host">김상두 · 윤옥례 배상</span>
+          </p>
+
+          <div class="reception-modal-box">
+            <div class="reception-info-row">
+              <span class="reception-label">일시</span>
+              <strong class="reception-value">2026년 10월 9일 금요일<br />11:00 ~ 14:00</strong>
+            </div>
+            <div class="reception-info-row">
+              <span class="reception-label">장소</span>
+              <strong class="reception-value">대갓집 숯불직화구이</strong>
+            </div>
+            <div class="reception-info-row">
+              <span class="reception-label">주소</span>
+              <span class="reception-value address">전남 광양시 광양읍 서천2길 27</span>
+            </div>
+
+            <div class="map-links reception-map-links">
+              <a class="map-link" href="https://map.naver.com/p/search/%EB%8C%80%EA%B0%93%EC%A7%91%EC%88%AF%EB%B6%88%EC%A7%81%ED%99%94%EA%B5%AC%EC%9D%B4" target="_blank" rel="noopener">네이버</a>
+              <a class="map-link" href="https://www.tmap.co.kr/search?searchKeyword=%EB%8C%80%EA%B0%93%EC%A7%91%EC%88%AF%EB%B6%88%EC%A7%81%ED%99%94%EA%B5%AC%EC%9D%B4" onclick="openTmapNavi('대갓집 숯불직화구이', event)" target="_blank" rel="noopener">티맵</a>
+              <a class="map-link" href="https://map.kakao.com/link/search/%EB%8C%80%EA%B0%93%EC%A7%91%EC%88%AF%EB%B6%88%EC%A7%81%ED%99%94%EA%B5%AC%EC%9D%B4" target="_blank" rel="noopener">카카오</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-bottom-btn">
+          <button class="btn-rect small no-plus" onclick="closeReceptionModal()">닫기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal" id="profileModal" aria-hidden="true">
     <div class="modal-backdrop" onclick="closeProfileModal()"></div>
     <div class="modal-sheet">
@@ -4897,6 +5057,39 @@
       closeModalBase("profileModal");
     }
 
+    // ▼▼▼ 여기에 피로연 모달 제어 및 티맵 함수 삽입 ▼▼▼
+    function openReceptionModal() {
+      openModalBase("receptionModal");
+    }
+
+    function closeReceptionModal() {
+      closeModalBase("receptionModal");
+    }
+
+    function openTmapNavi(placeName, event) {
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (!isMobile) return;
+
+      if (event) event.preventDefault();
+
+      const encodedName = encodeURIComponent(placeName);
+      const isAndroid = /Android/i.test(navigator.userAgent);
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+      if (isAndroid) {
+        location.href = `intent://search?name=${encodedName}#Intent;scheme=tmap;package=com.skt.tmap.ku;end`;
+      } else if (isIOS) {
+        const startTime = Date.now();
+        location.href = `tmap://search?name=${encodedName}`;
+        setTimeout(() => {
+          if (Date.now() - startTime < 1500) {
+            location.href = "https://apps.apple.com/kr/app/tmap-%EB%8C%80%EC%A4%91%EA%B5%90%ED%86%B5-%EB%82%B4%EB%B9%84/id431589174";
+          }
+        }, 1000);
+      }
+    }
+    // ▲▲▲ 피로연 모달 제어 함수 끝 ▲▲▲
+
     function openFoodModal() {
       openModalBase("foodModal");
     }
@@ -5190,6 +5383,7 @@
         closeFoodModal();
         closeTimelineModal();
         closeViewer();
+        closeReceptionModal();
       }
     });
 
@@ -5206,6 +5400,7 @@
     setupVideoOverlay();
     setupScrollReveal();
     initVenueMap();
+    openReceptionModal();
   </script>
 </body>
 </html>
