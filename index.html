@@ -2272,8 +2272,9 @@
 
     /* 1. 모달 활성화 시 배경 터치 스크롤 원천 차단 */
     body.modal-open {
-      overflow: hidden;
-      touch-action: auto;
+      overflow: hidden !important;
+      touch-action: none !important; /* ◀ 기존 auto에서 none으로 수정 */
+      -webkit-overflow-scrolling: auto !important;
     }
 /* 1. Buttons: content-based width and centered content group */
     .btn-rect,
@@ -2805,7 +2806,7 @@
     #receptionModal .reception-modal-box {
       background: var(--popup-soft);
       border-radius: 20px;
-      padding: 12px 20px 10px; /* (상우하좌) */
+      padding: 12px 25px 10px; /* (상우하좌) */
       display: flex;
       flex-direction: column;
       gap: 7px;
@@ -5040,13 +5041,22 @@
       closeModalBase("profileModal");
     }
 
+    function preventBodyScroll(e) {
+      // 터치된 요소가 모달 내부 스크롤 영역(#receptionModal .reception-modal-scroll)이 아니면 스크롤 방지
+      if (!e.target.closest('#receptionModal .reception-modal-scroll')) {
+        e.preventDefault();
+      }
+    }
+
     // ▼▼▼ 여기에 피로연 모달 제어 및 티맵 함수 삽입 ▼▼▼
     function openReceptionModal() {
       openModalBase("receptionModal");
+      document.addEventListener('touchmove', preventBodyScroll, { passive: false });
     }
 
     function closeReceptionModal() {
       closeModalBase("receptionModal");
+      document.removeEventListener('touchmove', preventBodyScroll);
     }
 
     function openTmapNavi(placeName, event) {
